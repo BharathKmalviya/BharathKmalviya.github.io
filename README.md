@@ -127,6 +127,8 @@ When you're ready to deploy, export the project as a static site:
 
 4. The exported files will be in `.kobweb/site/` directory, ready to deploy to any static hosting provider (GitHub Pages, Netlify, Firebase, Vercel, etc.)
 
+> **Note**: Pending to link with custom domain yet.
+
 ## 📚 Learn More
 
 - [Kobweb Documentation](https://kobweb.varabyte.com/)
