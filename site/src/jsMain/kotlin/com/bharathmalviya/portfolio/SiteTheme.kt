@@ -7,6 +7,7 @@ import com.varabyte.kobweb.silk.init.InitSilkContext
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.varabyte.kobweb.silk.theme.colors.palette.background
 import com.varabyte.kobweb.silk.theme.colors.palette.color
+import com.varabyte.kobweb.silk.theme.colors.palette.link
 
 /**
  * @property nearBackground A useful color to apply to a container that should differentiate itself from the background
@@ -25,7 +26,7 @@ class SitePalette(
 
 object SitePalettes {
     val light = SitePalette(
-        nearBackground = Color.rgb(0xF4F6FA),
+        nearBackground = Color.rgb(0xF8F9FA),
         cobweb = Colors.LightGray,
         brand = SitePalette.Brand(
             primary = Color.rgb(0x3C83EF),
@@ -33,10 +34,10 @@ object SitePalettes {
         )
     )
     val dark = SitePalette(
-        nearBackground = Color.rgb(0x13171F),
+        nearBackground = Color.rgb(0x1A1D24),
         cobweb = Colors.LightGray.inverted(),
         brand = SitePalette.Brand(
-            primary = Color.rgb(0x3C83EF),
+            primary = Color.rgb(0x5A9DFF), // Lighter blue for better visibility in dark mode
             accent = Color.rgb(0xF3DB5B),
         )
     )
@@ -51,8 +52,15 @@ fun ColorMode.toSitePalette(): SitePalette {
 
 @InitSilk
 fun initTheme(ctx: InitSilkContext) {
-    ctx.theme.palettes.light.background = Color.rgb(0xFAFAFA)
-    ctx.theme.palettes.light.color = Colors.Black
-    ctx.theme.palettes.dark.background = Color.rgb(0x06080B)
-    ctx.theme.palettes.dark.color = Colors.White
+    // Set Silk theme colors for light mode
+    ctx.theme.palettes.light.background = Color.rgb(0xFFFFFF)
+    ctx.theme.palettes.light.color = Color.rgb(0x1A1A1A)
+    
+    // Set Silk theme colors for dark mode
+    ctx.theme.palettes.dark.background = Color.rgb(0x0F1117)
+    ctx.theme.palettes.dark.color = Color.rgb(0xE5E7EB)
+    
+    // Customize link colors for better visibility
+    ctx.theme.palettes.light.link.default = Color.rgb(0x3C83EF)
+    ctx.theme.palettes.dark.link.default = Color.rgb(0x5A9DFF)
 }
