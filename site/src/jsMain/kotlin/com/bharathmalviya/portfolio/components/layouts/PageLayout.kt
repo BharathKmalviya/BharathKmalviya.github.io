@@ -1,4 +1,4 @@
-package com.bharath.malviya.components.layouts
+package com.bharathmalviya.portfolio.components.layouts
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -23,9 +23,9 @@ import org.jetbrains.compose.web.css.fr
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.dom.Div
 import org.jetbrains.compose.web.css.vh
-import com.bharath.malviya.components.sections.Footer
-import com.bharath.malviya.components.sections.NavHeader
-import com.bharath.malviya.toSitePalette
+import com.bharathmalviya.portfolio.components.sections.Footer
+import com.bharathmalviya.portfolio.components.sections.NavHeader
+import com.bharathmalviya.portfolio.toSitePalette
 
 val PageContentStyle = CssStyle {
     base { Modifier.fillMaxSize().padding(leftRight = 2.cssRem, top = 4.cssRem) }

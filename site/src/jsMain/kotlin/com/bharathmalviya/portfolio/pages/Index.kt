@@ -1,4 +1,4 @@
-package com.bharath.malviya.pages
+package com.bharathmalviya.portfolio.pages
 
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.StyleVariable
@@ -33,10 +33,10 @@ import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.css.vh
 import org.jetbrains.compose.web.dom.Div
 import org.jetbrains.compose.web.dom.Text
-import com.bharath.malviya.HeadlineTextStyle
-import com.bharath.malviya.SubheadlineTextStyle
-import com.bharath.malviya.components.layouts.PageLayoutData
-import com.bharath.malviya.toSitePalette
+import com.bharathmalviya.portfolio.HeadlineTextStyle
+import com.bharathmalviya.portfolio.SubheadlineTextStyle
+import com.bharathmalviya.portfolio.components.layouts.PageLayoutData
+import com.bharathmalviya.portfolio.toSitePalette
 
 // Container that has a tagline and grid on desktop, and just the tagline on mobile
 val HeroContainerStyle = CssStyle {

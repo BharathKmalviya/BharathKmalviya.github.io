@@ -7,7 +7,7 @@ plugins {
     alias(libs.plugins.kobwebx.markdown)
 }
 
-group = "com.bharath.malviya"
+group = "com.bharathmalviya.portfolio"
 version = "1.0-SNAPSHOT"
 
 kobweb {
@@ -21,7 +21,7 @@ kobweb {
 kotlin {
     // This example is frontend only. However, for a fullstack app, you can uncomment the includeServer parameter
     // and the `jvmMain` source set below.
-    configAsKobwebApplication("malviya" /*, includeServer = true*/)
+    configAsKobwebApplication("portfolio" /*, includeServer = true*/)
 
     sourceSets {
 //        commonMain.dependencies {

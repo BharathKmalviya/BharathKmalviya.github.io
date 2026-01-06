@@ -1,4 +1,4 @@
-package com.bharath.malviya
+package com.bharathmalviya.portfolio
 
 import com.varabyte.kobweb.compose.ui.graphics.Color
 import com.varabyte.kobweb.compose.ui.graphics.Colors

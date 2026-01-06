@@ -1,4 +1,4 @@
-package com.bharath.malviya.components.sections
+package com.bharathmalviya.portfolio.components.sections
 
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.TextAlign
@@ -19,7 +19,7 @@ import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.dom.Span
-import com.bharath.malviya.toSitePalette
+import com.bharathmalviya.portfolio.toSitePalette
 
 val FooterStyle = CssStyle.base {
     Modifier

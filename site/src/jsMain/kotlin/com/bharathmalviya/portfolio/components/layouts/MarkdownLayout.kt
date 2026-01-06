@@ -1,4 +1,4 @@
-package com.bharath.malviya.components.layouts
+package com.bharathmalviya.portfolio.components.layouts
 
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.FontWeight
@@ -20,7 +20,7 @@ import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.Div
-import com.bharath.malviya.toSitePalette
+import com.bharathmalviya.portfolio.toSitePalette
 
 val MarkdownStyle = CssStyle {
     base { Modifier.fillMaxSize() }
