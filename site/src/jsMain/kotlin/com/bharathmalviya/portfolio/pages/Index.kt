@@ -494,6 +494,26 @@ fun Index() {
                     )
                 }
             }
+
+            // Credits
+            Column(
+                Modifier
+                    .fillMaxWidth()
+                    .padding(top = 2.cssRem)
+                    .textAlign(com.varabyte.kobweb.compose.css.TextAlign.Center),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                P(Modifier.color(sitePalette.brand.primary).fontSize(0.875.cssRem).toAttrs()) {
+                    SpanText("Built with ")
+                    Link(
+                        "https://github.com/varabyte/kobweb",
+                        "Kobweb",
+                        Modifier.color(sitePalette.brand.primary),
+                        variant = UncoloredLinkVariant
+                    )
+                    SpanText(" - A Kotlin/JS web framework")
+                }
+            }
         }
     }
 }

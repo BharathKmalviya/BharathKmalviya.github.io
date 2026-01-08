@@ -166,4 +166,8 @@ This project is a personal portfolio website.
 
 ---
 
-Built with ❤️ using Kobweb
+## 🤖 Credits
+
+This portfolio website was created with the assistance of AI tools.
+
+Built with ❤️ using [Kobweb](https://github.com/varabyte/kobweb)
