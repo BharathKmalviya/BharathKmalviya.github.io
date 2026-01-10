@@ -80,9 +80,7 @@ Portfolio/
 │   │       └── resources/
 │   │           ├── markdown/                # Markdown pages
 │   │           │   └── About.md
-│   │           └── public/                  # Static assets
-│   │               ├── favicon.ico
-│   │               └── kobweb-logo.png
+│   │           └── public                  # Static assets
 │   └── build.gradle.kts
 ├── gradle/                        # Gradle configuration
 ├── settings.gradle.kts            # Project settings
