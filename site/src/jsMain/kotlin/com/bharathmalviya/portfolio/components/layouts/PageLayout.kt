@@ -28,14 +28,13 @@ fun PageLayout(ctx: PageContext, content: @Composable ColumnScope.() -> Unit) {
     Box(
         Modifier
             .fillMaxWidth()
-            .minHeight(100.vh)
-            .padding(leftRight = 2.cssRem, topBottom = 2.cssRem),
+            .minHeight(100.vh),
         contentAlignment = Alignment.Center
     ) {
         Column(
             Modifier
                 .fillMaxWidth()
-                .maxWidth(60.cssRem),
+                .maxWidth(72.cssRem),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             content()
