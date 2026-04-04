@@ -5,25 +5,41 @@ import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.silk.components.forms.ButtonStyle
 import com.varabyte.kobweb.silk.components.forms.ButtonVars
 import com.varabyte.kobweb.silk.components.layout.HorizontalDividerStyle
 import com.varabyte.kobweb.silk.init.InitSilk
 import com.varabyte.kobweb.silk.init.InitSilkContext
-import com.varabyte.kobweb.silk.init.registerStyleBase
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.addVariantBase
+import com.varabyte.kobweb.silk.style.animation.Keyframes
 import com.varabyte.kobweb.silk.style.base
 import com.varabyte.kobweb.silk.theme.colors.palette.color
 import com.varabyte.kobweb.silk.theme.colors.palette.toPalette
 import com.varabyte.kobweb.silk.theme.modifyStyleBase
 import org.jetbrains.compose.web.css.*
 
+val BlinkCursorAnim = Keyframes {
+    from { Modifier.opacity(1) }
+    to { Modifier.opacity(0) }
+}
+
+val FadeInUpAnim = Keyframes {
+    from {
+        Modifier
+            .opacity(0)
+            .translateY(20.px)
+    }
+    to {
+        Modifier
+            .opacity(1)
+            .translateY(0.px)
+    }
+}
+
 @InitSilk
 fun initSiteStyles(ctx: InitSilkContext) {
-    // This site does not need scrolling itself, but this is a good demonstration for how you might enable this in your
-    // own site. Note that we only enable smooth scrolling unless the user has requested reduced motion, which is
-    // considered a best practice.
     ctx.stylesheet.registerStyle("html") {
         cssRule(CSSMediaQuery.MediaFeature("prefers-reduced-motion", StylePropertyValue("no-preference"))) {
             Modifier.scrollBehavior(ScrollBehavior.Smooth)
@@ -40,7 +56,16 @@ fun initSiteStyles(ctx: InitSilkContext) {
             .lineHeight(1.5)
     }
 
-    // Silk dividers only extend 90% by default; we want full width dividers in our site
+    // Disable animations for users who prefer reduced motion
+    ctx.stylesheet.registerStyle("*") {
+        cssRule(CSSMediaQuery.MediaFeature("prefers-reduced-motion", StylePropertyValue("reduce"))) {
+            Modifier.styleModifier {
+                property("animation", "none !important")
+                property("transition", "none !important")
+            }
+        }
+    }
+
     ctx.theme.modifyStyleBase(HorizontalDividerStyle) {
         Modifier.fillMaxWidth()
     }
@@ -48,15 +73,15 @@ fun initSiteStyles(ctx: InitSilkContext) {
 
 val HeadlineTextStyle = CssStyle.base {
     Modifier
-        .fontSize(3.cssRem)
-        .textAlign(TextAlign.Start)
-        .lineHeight(1.2) //1.5x doesn't look as good on very large text
+        .fontSize(4.cssRem)
+        .textAlign(TextAlign.Center)
+        .lineHeight(1.2)
 }
 
 val SubheadlineTextStyle = CssStyle.base {
     Modifier
         .fontSize(1.cssRem)
-        .textAlign(TextAlign.Start)
+        .textAlign(TextAlign.Center)
         .color(colorMode.toPalette().color.toRgb().copyf(alpha = 0.8f))
 }
 
