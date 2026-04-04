@@ -30,3 +30,6 @@ kotlin-js-store
 
 # Java heap dumps
 *.hprof
+
+# Git worktrees
+.worktrees/
