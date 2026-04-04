@@ -5,8 +5,6 @@ import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.foundation.layout.*
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.graphics.Color
-import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.compose.ui.toAttrs
@@ -29,6 +27,7 @@ import com.bharathmalviya.portfolio.components.widgets.GitHubIcon
 import com.bharathmalviya.portfolio.components.widgets.LinkedInIcon
 import com.bharathmalviya.portfolio.components.widgets.TwitterXIcon
 import com.bharathmalviya.portfolio.toSitePalette
+import com.varabyte.kobweb.compose.css.AnimationIterationCount
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.*
@@ -83,9 +82,10 @@ private fun HeroSection(colorMode: ColorMode, sitePalette: SitePalette) {
 
     Box(
         Modifier
-            .fillMaxWidth()
             .minHeight(100.vh)
             .styleModifier {
+                property("width", "100vw")
+                property("margin-left", "calc(50% - 50vw)")
                 if (colorMode.isLight) {
                     property(
                         "background-image",
@@ -123,7 +123,7 @@ private fun HeroSection(colorMode: ColorMode, sitePalette: SitePalette) {
                     .margin(bottom = 1.5.cssRem)
                     .padding(leftRight = 1.cssRem, topBottom = 0.4.cssRem)
                     .borderRadius(2.cssRem)
-                    .border(1.px, LineStyle.Solid, sitePalette.brand.primary.copyf(alpha = 0.6f))
+                    .border(1.px, LineStyle.Solid, sitePalette.brand.primary.toRgb().copyf(alpha = 0.6f))
                     .color(sitePalette.brand.primary)
                     .fontSize(0.875.cssRem)
                     .styleModifier {
@@ -186,7 +186,7 @@ private fun HeroSection(colorMode: ColorMode, sitePalette: SitePalette) {
                         .animation(
                             BlinkCursorAnim.toAnimation(
                                 duration = 1.s,
-                                iterationCount = AnimationIterationCount.infinite,
+                                iterationCount = AnimationIterationCount.Infinite,
                                 timingFunction = AnimationTimingFunction.StepEnd
                             )
                         )
@@ -199,30 +199,17 @@ private fun HeroSection(colorMode: ColorMode, sitePalette: SitePalette) {
                     .margin(bottom = 2.cssRem)
                     .padding(leftRight = 0.75.cssRem, topBottom = 0.35.cssRem)
                     .borderRadius(2.cssRem)
-                    .backgroundColor(sitePalette.brand.primary.copyf(alpha = 0.12f))
+                    .backgroundColor(sitePalette.brand.primary.toRgb().copyf(alpha = 0.12f))
                     .color(sitePalette.brand.primary)
                     .fontSize(0.875.cssRem)
                     .styleModifier { property("display", "inline-block") }
                     .toAttrs()
             ) {
-                SpanText("📍 Rajasthan, India")
+                SpanText("📍 Mumbai, India")
             }
 
             // CTA buttons
             Row(Modifier.gap(1.cssRem)) {
-                Link(
-                    "#about",
-                    "View My Work",
-                    Modifier
-                        .padding(leftRight = 1.75.cssRem, topBottom = 0.875.cssRem)
-                        .borderRadius(0.5.cssRem)
-                        .backgroundColor(sitePalette.brand.primary)
-                        .color(if (colorMode.isLight) Colors.White else Color.rgb(0x0A0F1E))
-                        .fontWeight(600)
-                        .fontSize(1.cssRem)
-                        .styleModifier { property("transition", "opacity 0.2s ease") },
-                    variant = UncoloredLinkVariant
-                )
                 Link(
                     "mailto:Bharathkmalviya@gmail.com",
                     "Get In Touch",
@@ -271,7 +258,7 @@ private fun AboutSection(colorMode: ColorMode, sitePalette: SitePalette) {
                 .fillMaxWidth()
                 .padding(2.cssRem)
                 .borderRadius(1.cssRem)
-                .border(1.px, LineStyle.Solid, sitePalette.brand.primary.copyf(alpha = 0.2f))
+                .border(1.px, LineStyle.Solid, sitePalette.brand.primary.toRgb().copyf(alpha = 0.2f))
                 .styleModifier {
                     property("backdrop-filter", "blur(12px)")
                     property("-webkit-backdrop-filter", "blur(12px)")
@@ -362,7 +349,7 @@ private fun SocialIconButton(
             .width(56.px)
             .height(56.px)
             .borderRadius(50.percent)
-            .border(1.px, LineStyle.Solid, sitePalette.brand.primary.copyf(alpha = 0.4f))
+            .border(1.px, LineStyle.Solid, sitePalette.brand.primary.toRgb().copyf(alpha = 0.4f))
             .color(sitePalette.brand.primary)
             .styleModifier {
                 property("display", "flex")
