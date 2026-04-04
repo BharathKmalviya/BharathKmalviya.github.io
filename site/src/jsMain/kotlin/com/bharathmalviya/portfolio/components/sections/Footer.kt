@@ -25,7 +25,7 @@ val FooterStyle = CssStyle.base {
         .borderTop(
             1.px,
             LineStyle.Solid,
-            colorMode.toSitePalette().brand.primary.copyf(alpha = 0.15f)
+            colorMode.toSitePalette().brand.primary.toRgb().copyf(alpha = 0.15f)
         )
 }
 

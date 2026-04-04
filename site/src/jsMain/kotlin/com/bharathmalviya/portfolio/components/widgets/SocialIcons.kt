@@ -1,10 +1,10 @@
 package com.bharathmalviya.portfolio.components.widgets
 
 import androidx.compose.runtime.Composable
+import com.varabyte.kobweb.compose.dom.svg.Path
+import com.varabyte.kobweb.compose.dom.svg.Svg
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.toAttrs
-import org.jetbrains.compose.web.svg.Path
-import org.jetbrains.compose.web.svg.Svg
 
 @Composable
 fun LinkedInIcon(modifier: Modifier = Modifier) {
