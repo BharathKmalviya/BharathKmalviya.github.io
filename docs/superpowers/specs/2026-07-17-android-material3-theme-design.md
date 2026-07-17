@@ -41,10 +41,21 @@ Google's own Material 3 Expressive design language.
 - The site owner is an Android developer — Material Design is their home turf, and the
   explicit goal was authenticity ("almost real as Google"), not a Material-*inspired*
   restyle.
-- Real ripple/state-layer interaction physics, and long-term fidelity to Google's own
-  future component updates, are only available from Google's actual implementation. A
-  restyled-shadcn/ui alternative was explicitly considered and rejected in favor of this
-  higher-fidelity, higher-effort path.
+- Real ripple/state-layer interaction physics are only available from Google's actual
+  implementation. A restyled-shadcn/ui alternative was explicitly considered and rejected
+  in favor of this higher-fidelity, higher-effort path.
+- **Correction after further research**: the original version of this rationale also
+  cited "long-term fidelity to Google's own future component updates" as a reason to
+  prefer `@material/web`. That's weaker than stated — Google's Material Web team
+  announced `@material/web` is now in **maintenance mode**
+  (`material-components/material-web` discussion #5642, 2026-05-19): engineers were
+  reassigned to Google's internal Wiz framework, "new features and components are no
+  longer planned," and PRs aren't accepted by default. The library still works and ships
+  real Google-authored components today — that part of the fidelity argument holds — but
+  it will very likely **not** receive new M3 Expressive shape/component updates from
+  Google going forward. Decision after weighing this: proceed with `@material/web` anyway
+  — "authentic today, not actively evolving" is an acceptable trade for a personal
+  portfolio that doesn't need years of upstream feature growth under it.
 - Frosted glass/blur is an iOS/Windows visual convention, not part of Material's design
   language (which expresses elevation through tonal surfaces and shadows) — keeping it
   would undercut the authenticity goal.
@@ -98,3 +109,11 @@ Google's own Material 3 Expressive design language.
   screen-by-screen during implementation, per constitution Principle II (incremental,
   confirmed delivery) — this spec covers the design-system decision, not a full
   component inventory.
+- `@material/web`'s stable (non-`labs/`) components confirmed available as of this
+  writing (button, checkbox, chips, dialog, divider, fab, icon, iconbutton, list, menu,
+  progress, radio, select, slider, switch, tabs, textfield) may still reflect the
+  "classic" M3 shape system rather than the newer Expressive shape refresh — some
+  Expressive-specific shapes/components (e.g. card) currently only exist under
+  `@material/web/labs/`, which carries its own experimental-stability caveat. Whether a
+  given section needs a `labs/` component is a call to make per-component during
+  implementation, not decided wholesale here.
