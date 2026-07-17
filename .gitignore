@@ -33,3 +33,10 @@ kotlin-js-store
 
 # Git worktrees
 .worktrees/
+
+# Spec Kit
+.specify/
+
+# AI tool configs
+.claude/
+.cursor/
