@@ -8,9 +8,18 @@ This portfolio is being rewritten as a React app on the `feature/react-portfolio
 
 ## Tech Stack & Design
 
-- **Stack**: Next.js 16 (App Router, static export), TypeScript, Tailwind CSS v4, Material Web (`@material/web`) + `@lit-labs/nextjs`, Framer Motion, `next-themes`, EmailJS + React Hook Form + Zod (contact form). Hosted on GitHub Pages (`bharathmalviya.com`).
+- **Stack**: Next.js 16 (App Router, static export), TypeScript, Tailwind CSS v4, Material Web (`@material/web`, rendered as client components — a brief hydration flash on first paint is an accepted trade-off, see design spec), Framer Motion, `next-themes`, EmailJS + React Hook Form + Zod (contact form). Hosted on GitHub Pages (`bharathmalviya.com`).
 - **Visual design**: Material 3 Expressive, authentically Google-styled (not Material-*inspired*) — reflects the site owner's background as an Android developer. Seed color is Android's fixed brand green `#3DDC84` (pre-Material You), typography is Roboto Flex, icons are Material Symbols.
 - **Full detail**: project principles and constraints are ratified in `.specify/memory/constitution.md`; the theme decision and its rationale are in `docs/superpowers/specs/2026-07-17-android-material3-theme-design.md`. Treat both as the source of truth — update them whenever a decision changes, don't just repeat context in chat.
+
+## Git Workflow
+
+Single-maintainer project — no PR process, no code review gate. Still keep history clean since the repo is public:
+
+- **Branches**: `master` is the live, deployed site — only updated when a feature branch is complete and verified. `feature/*` branches (e.g. `feature/react-portfolio`) hold active work. `archive/*` branches (e.g. `archive/kobweb-kotlin`) are frozen historical reference and MUST NOT be modified.
+- **Commits**: use the conventional prefixes already established in this repo's history — `feat:`, `fix:`, `docs:`, `chore:` — one logical change per commit, descriptive message body when the "why" isn't obvious from the subject line.
+- **Merging to `master`**: only once a feature branch's work is complete and verified (build passes, feature reviewed in-browser per the project's verification practice), not mid-feature.
+- **No AI attribution, ever**: commit messages MUST NOT include `Co-Authored-By`/`Co-authored-by` trailers or any mention of Claude, Anthropic, Cursor, or any AI tool. Commits MUST be authored as the human user, never under an AI identity. (This restates the global commit policy in this machine's user-level `CLAUDE.md` explicitly, so it holds even if that file isn't present.)
 
 <!-- SPECKIT START -->
 For additional context about technologies to be used, project structure,

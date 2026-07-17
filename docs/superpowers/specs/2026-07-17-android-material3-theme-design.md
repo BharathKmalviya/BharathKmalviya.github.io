@@ -11,9 +11,11 @@ Google's own Material 3 Expressive design language.
 
 - **Component library**: `@material/web` — Google's official Material 3 Web Components.
   This replaces the shadcn/ui direction set in the original constitution (v1.0.0/1.1.0).
-- **SSR helper**: `@lit-labs/nextjs` — Lit's official Next.js integration, needed so the
-  components render real markup inside the site's static export instead of empty
-  custom-element tags (see Technical Risk below).
+- **SSR helper**: none. `@lit-labs/nextjs` was considered but rejected — it's an
+  experimental "Lit Labs" package with no confirmed Next.js 16 support (its own
+  `package.json` caps at Next.js 15). Material Web components render as standard React
+  Client Components instead, accepting a brief first-paint hydration flash (see
+  Technical Risk below).
 - **Layout/spacing**: Tailwind CSS, used around Material Web components for page layout,
   grids, and spacing — not to restyle the components' internals.
 - **Motion**: Framer Motion, for page-level orchestration (scroll-triggered entrances,
@@ -54,12 +56,21 @@ Google's own Material 3 Expressive design language.
   pre-rendered to HTML once at build time. Without help, Web Components render as empty
   custom-element tags in that pre-rendered HTML until client JS loads and registers them:
   a brief flash on first paint, and no content for anything that doesn't execute JS.
-- **Mitigation**: `@lit-labs/nextjs` pre-renders the components' actual shadow-DOM content
-  into the static HTML, eliminating the flash. React 19 (used by Next.js 16) also
-  resolved most of the historical friction passing complex props into custom elements
-  from React.
-- **Residual gap**: none identified beyond normal implementation effort — this path uses
-  Google's actual component code, not an approximation of it.
+- **Mitigation considered and rejected**: `@lit-labs/nextjs` would pre-render the
+  components' shadow-DOM content into the static HTML, eliminating the flash — but it's
+  an experimental "Lit Labs" package whose `package.json` only declares support for
+  Next.js 13/14/15 (not the 16 this project requires), and whose own docs say it's only
+  been tested against 13/14. Taking on an unverified dependency to fix a cosmetic
+  first-paint detail was judged not worth it.
+- **Accepted trade-off**: Material Web components render as standard React Client
+  Components (`'use client'`) with no SSR helper. They show a brief hydration flash on
+  first paint — the same category of behavior as any client-rendered component tree, not
+  a functional defect. Page text/SEO is unaffected, since that comes from Next's Metadata
+  API, not component internals. React 19 (used by Next.js 16) also resolved most of the
+  historical friction passing complex props into custom elements from React.
+- **Residual gap**: the first-paint flash described above. Revisit `@lit-labs/nextjs` (or
+  whatever SSR story Lit ships by then) later if it proves visually bothersome in
+  practice — nothing about skipping it now forecloses that.
 
 ## What This Replaces From the Original Stack Decision
 
