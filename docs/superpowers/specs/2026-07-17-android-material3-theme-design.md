@@ -24,8 +24,13 @@ Google's own Material 3 Expressive design language.
   not generic CSS ease curves.
 - **Color**: Seed color `#3DDC84` — Android's fixed brand green, deliberately chosen from
   before the Material You dynamic-color system. Run through Google's Material Color
-  Utilities algorithm to generate the full official M3 tonal palette for both light and
-  dark modes. Theme switching stays on `next-themes`.
+  Utilities algorithm, using the **`SchemeVibrant`** scheme variant, to generate the full
+  official M3 tonal palette for both light and dark modes. (Not `SchemeExpressive` — despite
+  the name matching this project's design-language goal, that specific algorithm is
+  "intentionally detached from the source color" by design and turns the green seed into a
+  brown/orange primary. Discovered and corrected during implementation; see the
+  implementation plan's Global Constraints for the verified comparison.) Theme switching
+  stays on `next-themes`.
 - **Typography**: Roboto Flex — Material 3's public web typeface (Google Sans is
   Google-internal-only and not licensed for outside use), loaded via `next/font/google`.
 - **Iconography**: Material Symbols — Google's icon font, built to pair natively with

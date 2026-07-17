@@ -14,7 +14,7 @@
 - UI MUST be built from `@material/web` components, laid out with Tailwind; fully custom components only when Material Web has no equivalent. (Constitution Principle III)
 - No library gets added speculatively — everything in this plan is used by the task that adds it. (Constitution Principle IV)
 - Every page MUST support light/dark themes via `next-themes` and meet baseline accessibility (semantic HTML, keyboard navigable, sufficient contrast). (Constitution Principle V)
-- Seed color is `#3DDC84` (Android's fixed brand green, pre-Material You); typography is Roboto Flex; icons are Material Symbols; scheme variant is M3 **Expressive**, not a default/TonalSpot scheme. (Design spec: `docs/superpowers/specs/2026-07-17-android-material3-theme-design.md`)
+- Seed color is `#3DDC84` (Android's fixed brand green, pre-Material You); typography is Roboto Flex; icons are Material Symbols. **Correction found during Task 4's verification**: the color-scheme *algorithm* variant is `SchemeVibrant`, not `SchemeExpressive` — `SchemeExpressive` is "intentionally detached from the source color" by its own design (confirmed by generating both: it turns the `#3DDC84` green seed into a brown/orange `#934931` primary), which directly breaks the "keep the Android green" requirement. `SchemeVibrant` preserves the green seed as primary (`#006d3b`) while still producing a bold, saturated secondary/tertiary palette — closest in spirit to the "Expressive" *aesthetic* without the naming collision. The overall "M3 Expressive" design language (shape system, type scale, motion physics) is unaffected — those come from separate token categories, not from this scheme-variant choice. (Design spec: `docs/superpowers/specs/2026-07-17-android-material3-theme-design.md`)
 - No `@lit-labs/nextjs` — it's unverified on Next.js 16. Material Web components render as plain Client Components; a brief first-paint hydration flash is an accepted trade-off, not a bug to fix in this plan.
 - Package manager is pnpm.
 - No AI attribution in any commit.
@@ -154,11 +154,20 @@ Expected: FAIL — `Cannot find module './theme-tokens.mjs'` (the module doesn't
 
 Create `scripts/theme-tokens.mjs`:
 
+**Note:** the code below uses `SchemeVibrant`, not `SchemeExpressive`. This plan originally
+specified `SchemeExpressive` on the assumption that "Expressive" the color-scheme algorithm
+matched "M3 Expressive" the design language the site is going for. It doesn't:
+`SchemeExpressive`'s own source comment says it's "intentionally detached from the source
+color" — verified by generating it, which turns the `#3DDC84` green seed into a brown/orange
+`#934931` primary. `SchemeVibrant` preserves the seed as primary (`#006d3b`) while still
+producing a bold, saturated secondary/tertiary palette. Found and corrected during Task 4's
+verification.
+
 ```js
 import {
   Hct,
   MaterialDynamicColors,
-  SchemeExpressive,
+  SchemeVibrant,
   argbFromHex,
   hexFromArgb,
 } from '@material/material-color-utilities';
@@ -194,7 +203,7 @@ function toKebabCase(role) {
  */
 export function generateTokens(seedHex, isDark, contrastLevel = 0.0) {
   const sourceHct = Hct.fromInt(argbFromHex(seedHex));
-  const scheme = new SchemeExpressive(sourceHct, isDark, contrastLevel);
+  const scheme = new SchemeVibrant(sourceHct, isDark, contrastLevel);
 
   const tokens = {};
   for (const role of COLOR_ROLES) {
