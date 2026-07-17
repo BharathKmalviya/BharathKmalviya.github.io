@@ -1,28 +1,18 @@
 'use client';
 
-import {useRef, type ReactNode} from 'react';
-import {motion, useScroll, useTransform} from 'framer-motion';
+import type {ReactNode} from 'react';
+import {motion} from 'framer-motion';
 import {EmailIcon, GitHubIcon, LinkedInIcon, TwitterXIcon} from '@/components/icons/social-icons';
 
-// Mirrors the light-mode --md-sys-color-primary / --md-sys-color-on-primary values
-// generated in src/styles/md-color-tokens.css. Framer Motion's color interpolation
-// needs literal color values, not CSS var() references, so these are duplicated here
-// deliberately -- if the seed color or scheme variant ever changes, regenerate the
-// tokens (pnpm run generate:theme) and update these two constants to match.
-const HERO_START_BG = '#ffffff';
-const HERO_END_BG = '#006d3b'; // --md-sys-color-primary
-const HERO_START_TEXT = '#000000';
-const HERO_END_TEXT = '#ffffff'; // --md-sys-color-on-primary
-
-const ARC_TRANSITION = {duration: 0.7, ease: [0.16, 1, 0.3, 1] as const};
+const REVEAL_SPRING = {type: 'spring' as const, stiffness: 220, damping: 24, mass: 0.9};
 
 function ArcReveal({children, delay = 0}: {children: ReactNode; delay?: number}) {
   return (
     <motion.div
-      initial={{opacity: 0, y: 72, rotate: -3}}
-      whileInView={{opacity: 1, y: 0, rotate: 0}}
-      viewport={{once: true, margin: '-15% 0px -15% 0px'}}
-      transition={{...ARC_TRANSITION, delay}}>
+      initial={{opacity: 0, y: 64, scale: 0.94}}
+      whileInView={{opacity: 1, y: 0, scale: 1}}
+      viewport={{once: true, margin: '-10% 0px -10% 0px'}}
+      transition={{...REVEAL_SPRING, delay}}>
       {children}
     </motion.div>
   );
@@ -35,35 +25,37 @@ const SOCIAL_LINKS = [
   {href: 'mailto:Bharathkmalviya@gmail.com', label: 'Email', Icon: EmailIcon},
 ];
 
+// Full-width elliptical arch, not just rounded corners: a 50% horizontal
+// radius on both top corners makes them meet at the center, so the curve
+// spans the entire top edge as one continuous arc instead of leaving a
+// flat segment between two rounded corners. The vertical radius (the
+// value after the "/") controls how tall/pronounced the arch is.
+const ARCH_RADIUS = '50% 50% 0 0 / 4.5rem 4.5rem 0 0';
+
 export function PortfolioPage() {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const {scrollYProgress} = useScroll({
-    target: heroRef,
-    offset: ['start start', 'end start'],
-  });
-
-  const heroBackground = useTransform(scrollYProgress, [0, 1], [HERO_START_BG, HERO_END_BG]);
-  const heroTextColor = useTransform(scrollYProgress, [0, 1], [HERO_START_TEXT, HERO_END_TEXT]);
-  const heroChipOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
-
   return (
     <main>
-      <motion.section
-        ref={heroRef}
-        style={{backgroundColor: heroBackground, color: heroTextColor}}
-        className="flex min-h-screen flex-col items-center justify-center gap-4 px-6 text-center">
-        <motion.span style={{opacity: heroChipOpacity}} className="text-sm font-medium tracking-widest uppercase">
-          Android Engineer
-        </motion.span>
+      {/* Normal document flow -- the whole page scrolls together as one
+          continuous page. The hero scrolls away naturally; only the arch
+          panel below gets its own slide-up-into-place entrance animation
+          as it scrolls into view. */}
+      <section className="flex h-screen flex-col items-center justify-center gap-4 bg-white px-6 text-center text-black">
+        <span className="text-sm font-medium tracking-widest text-black/70 uppercase">Android Engineer</span>
         <h1 className="text-5xl font-bold sm:text-7xl">Bharath K Malviya</h1>
-        <motion.span style={{opacity: heroChipOpacity}} className="text-base sm:text-lg">
-          Mumbai, India
-        </motion.span>
-      </motion.section>
+        <span className="text-base text-black/70 sm:text-lg">Mumbai, India</span>
+      </section>
 
-      <section
-        className="flex flex-col gap-24 px-6 py-24 sm:px-12"
-        style={{backgroundColor: 'var(--md-sys-color-primary)', color: 'var(--md-sys-color-on-primary)'}}>
+      <motion.section
+        initial={{y: 160, opacity: 0}}
+        whileInView={{y: 0, opacity: 1}}
+        viewport={{once: true, amount: 0.15}}
+        transition={{type: 'spring', stiffness: 90, damping: 20, mass: 1}}
+        className="relative z-10 flex flex-col gap-24 px-6 py-24 sm:px-12 sm:py-32"
+        style={{
+          backgroundColor: 'var(--md-sys-color-primary)',
+          color: 'var(--md-sys-color-on-primary)',
+          borderRadius: ARCH_RADIUS,
+        }}>
         <ArcReveal>
           <div className="mx-auto max-w-2xl">
             <p className="mb-2 font-mono text-sm opacity-80">// about_me</p>
@@ -89,26 +81,31 @@ export function PortfolioPage() {
             <p className="mb-2 font-mono text-sm opacity-80">// connect</p>
             <h2 className="mb-8 text-3xl font-bold sm:text-4xl">Let&apos;s Connect</h2>
             <div className="flex gap-6">
-              {SOCIAL_LINKS.map(({href, label, Icon}) => (
-                <a
+              {SOCIAL_LINKS.map(({href, label, Icon}, i) => (
+                <motion.a
                   key={label}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
                   title={label}
-                  className="flex h-14 w-14 items-center justify-center rounded-full border transition-opacity hover:opacity-70"
+                  initial={{opacity: 0, y: 24, scale: 0.8}}
+                  whileInView={{opacity: 1, y: 0, scale: 1}}
+                  viewport={{once: true, margin: '-10% 0px -10% 0px'}}
+                  transition={{...REVEAL_SPRING, delay: 0.2 + i * 0.08}}
+                  whileHover={{scale: 1.1}}
+                  className="flex h-14 w-14 items-center justify-center rounded-full border"
                   style={{
                     borderColor: 'var(--md-sys-color-on-primary)',
                     color: 'var(--md-sys-color-on-primary)',
                   }}>
                   <Icon />
-                </a>
+                </motion.a>
               ))}
             </div>
           </div>
         </ArcReveal>
-      </section>
+      </motion.section>
     </main>
   );
 }
