@@ -6,7 +6,7 @@
 
 **Architecture:** A static-export Next.js 16 App Router project. A small Node script generates the official M3 Expressive color scheme (light + dark) from a seed color using Google's own color-science library and writes it as CSS custom properties that both Tailwind-styled layout and `@material/web` components read from. `next-themes` toggles between the light/dark token sets. Material Web components are used as plain React Client Components — no SSR helper (see constitution Principle III and the design spec's Technical Risk section for why).
 
-**Tech Stack:** Next.js 16 (App Router, TypeScript, static export), Tailwind CSS v4, `@material/material-color-utilities`, `@material/web`, `next-themes`, `next/font/google` (Roboto Flex + Material Symbols Outlined), Vitest (unit tests), pnpm.
+**Tech Stack:** Next.js 16 (App Router, TypeScript, static export), Tailwind CSS v4, `@material/material-color-utilities`, `@material/web`, `next-themes`, `next/font/google` (Roboto Flex only — Material Symbols has no `next/font/google` export, see Task 3), `material-symbols` npm package (Material Symbols Outlined), Vitest (unit tests), pnpm.
 
 ## Global Constraints
 
@@ -474,7 +474,7 @@ git commit -m "feat: load Roboto Flex and Material Symbols fonts"
 - Modify: `src/app/page.tsx`, `package.json` (add `@material/web`)
 
 **Interfaces:**
-- Consumes: `--md-sys-color-*` tokens (Task 2), `--font-roboto-flex` / `--font-material-symbols` (Task 3), `ThemeProvider` (Task 2).
+- Consumes: `--md-sys-color-*` tokens (Task 2), `--font-roboto-flex` (Task 3), the globally-registered `"Material Symbols Outlined"` font-face from the `material-symbols` package (Task 3), `ThemeProvider` (Task 2).
 - Produces: nothing further tasks depend on — this task's deliverable is the end-to-end proof that the design system works, ahead of building real portfolio content in future plans.
 
 - [ ] **Step 1: Install Material Web**
@@ -484,6 +484,13 @@ pnpm add @material/web
 ```
 
 - [ ] **Step 2: Declare the custom elements for TypeScript**
+
+**Note on an implementation deviation, recorded here for the same reason as the other two
+corrections in this plan:** the `.d.ts` code below originally used
+`declare global { namespace JSX { ... } }`. That doesn't compile under the installed
+`@types/react@19` — `JSX` is nested inside the `React` module's own namespace there (not
+global), because `@types/react` is itself an ES module. The working, verified pattern is
+`declare module 'react' { namespace JSX { ... } }` instead, shown below.
 
 Create `src/types/material-web.d.ts`:
 
@@ -495,7 +502,7 @@ type MdElementProps = DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement
   value?: string;
 };
 
-declare global {
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       'md-filled-button': MdElementProps;
