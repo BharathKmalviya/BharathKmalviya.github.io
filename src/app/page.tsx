@@ -1,9 +1,5 @@
-import {MaterialWebDemo} from '@/components/material-web-demo-loader';
+import {PortfolioPage} from '@/components/portfolio-page';
 
 export default function Home() {
-  return (
-    <main>
-      <MaterialWebDemo />
-    </main>
-  );
+  return <PortfolioPage />;
 }
