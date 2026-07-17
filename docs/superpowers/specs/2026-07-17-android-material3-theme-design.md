@@ -82,15 +82,27 @@ Google's own Material 3 Expressive design language.
   Next.js 13/14/15 (not the 16 this project requires), and whose own docs say it's only
   been tested against 13/14. Taking on an unverified dependency to fix a cosmetic
   first-paint detail was judged not worth it.
-- **Accepted trade-off**: Material Web components render as standard React Client
-  Components (`'use client'`) with no SSR helper. They show a brief hydration flash on
-  first paint — the same category of behavior as any client-rendered component tree, not
-  a functional defect. Page text/SEO is unaffected, since that comes from Next's Metadata
-  API, not component internals. React 19 (used by Next.js 16) also resolved most of the
-  historical friction passing complex props into custom elements from React.
-- **Residual gap**: the first-paint flash described above. Revisit `@lit-labs/nextjs` (or
-  whatever SSR story Lit ships by then) later if it proves visually bothersome in
-  practice — nothing about skipping it now forecloses that.
+- **Correction after hitting this in practice**: the original text here assumed marking a
+  component `'use client'` would be enough, causing only "a brief hydration flash." That
+  was wrong — Next.js App Router still server-renders Client Components for the first
+  paint by default; only the *interactivity* is client-only. Material Web's custom
+  elements got server-rendered as bare tags, and when Lit registered the real elements in
+  the browser and added their own reflected attributes (`has-icon`, `aria-hidden`, etc.),
+  React logged a genuine hydration-mismatch console error — not just a cosmetic flash.
+  **Actual fix**: wrap the Material-Web-containing component in `next/dynamic(..., {ssr:
+  false})`, inside its own dedicated Client Component file (`next/dynamic`'s `ssr: false`
+  option is only allowed inside a Client Component, not a Server Component like a page.tsx
+  file — it has to live in a small wrapper, e.g. `material-web-demo-loader.tsx`). This
+  skips server-rendering these elements entirely, so there's nothing for React to mismatch
+  against — verified with a real headless-browser screenshot showing no console errors,
+  correct green M3 styling, real icon glyphs (not literal ligature text), and correct
+  light/dark color swapping.
+- **Residual gap**: none identified — the dynamic-import-with-`ssr:false` pattern
+  eliminates the hydration mismatch entirely, not just the visual flash. The one remaining
+  cost is that these elements render nothing in the raw server HTML (a `@lit-labs/nextjs`-
+  style SSR helper would avoid even that), which is irrelevant for interactive widgets but
+  would matter for content that needs to be in the initial HTML for SEO — worth keeping in
+  mind if a future section leans on Material Web for primarily textual/SEO-relevant content.
 
 ## What This Replaces From the Original Stack Decision
 

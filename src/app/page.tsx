@@ -1,4 +1,4 @@
-import {MaterialWebDemo} from '@/components/material-web-demo';
+import {MaterialWebDemo} from '@/components/material-web-demo-loader';
 
 export default function Home() {
   return (
