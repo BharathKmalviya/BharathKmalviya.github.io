@@ -341,48 +341,62 @@ git commit -m "feat: generate M3 Expressive color tokens and wire up theme switc
 
 ---
 
-### Task 3: Load Roboto Flex and Material Symbols via next/font/google
+### Task 3: Load Roboto Flex via next/font/google and Material Symbols via the `material-symbols` package
+
+**Correction (recorded here for anyone reading this plan after the fact):** the plan
+originally called for loading Material Symbols Outlined through `next/font/google`, the
+same as Roboto Flex. That's not possible: `next/font/google`'s font catalog is generated
+from Google's regular *typeface* catalog (fonts.google.com), and Material Symbols is
+served from Google's separate *icon-font* catalog (fonts.google.com/icons) — confirmed by
+grepping the installed `next@16` package's compiled Google-fonts metadata, which contains
+no `Material_*` export of any kind. The fix below uses `material-symbols`
+(github.com/marella/material-symbols, Apache-2.0, the same Google-authored font files,
+auto-updated, ~4M weekly downloads) instead — a plain self-hosted CSS+font-file package,
+still fully static/offline, no `next/font` involved for this one asset.
 
 **Files:**
 - Create: `src/app/fonts.ts`
-- Modify: `src/app/layout.tsx`, `src/app/globals.css`
+- Modify: `src/app/layout.tsx`, `src/app/globals.css`, `package.json` (add `material-symbols`)
 
 **Interfaces:**
 - Consumes: `src/app/layout.tsx` from Task 2 (Step 9's version).
-- Produces: `robotoFlex` and `materialSymbolsOutlined` (exported from `src/app/fonts.ts`, each a `next/font` result object with a `.variable` string property). Task 4's verification page relies on the Material Symbols CSS variable being active globally so `<md-icon>` ligature text renders as icons instead of literal words.
+- Produces: `robotoFlex` (exported from `src/app/fonts.ts`, a `next/font` result object with
+  a `.variable` string property). Material Symbols has no equivalent export — it works
+  globally once its CSS is imported, with no `.variable` plumbing needed. Task 4's
+  verification page relies on `<md-icon>` ligature text (e.g. `arrow_back`) rendering as an
+  actual icon glyph, not the literal word.
 
-- [ ] **Step 1: Define the fonts**
+- [ ] **Step 1: Install the icon font package**
+
+```bash
+pnpm add material-symbols
+```
+
+- [ ] **Step 2: Define Roboto Flex**
 
 Create `src/app/fonts.ts`:
 
 ```ts
-import {Material_Symbols_Outlined, Roboto_Flex} from 'next/font/google';
+import {Roboto_Flex} from 'next/font/google';
 
 export const robotoFlex = Roboto_Flex({
   subsets: ['latin'],
   variable: '--font-roboto-flex',
   display: 'swap',
 });
-
-// display: 'block' (not 'swap') so a fallback font never briefly renders the
-// icon's ligature name (e.g. literal text "settings") before the icon font loads.
-export const materialSymbolsOutlined = Material_Symbols_Outlined({
-  subsets: ['latin'],
-  variable: '--font-material-symbols',
-  display: 'block',
-});
 ```
 
-- [ ] **Step 2: Apply the font variables in the root layout**
+- [ ] **Step 3: Apply the font variable and import the icon font's CSS in the root layout**
 
 Replace the contents of `src/app/layout.tsx` with:
 
 ```tsx
 import type {Metadata} from 'next';
 import type {ReactNode} from 'react';
+import 'material-symbols/outlined.css';
 import './globals.css';
 import {ThemeProvider} from '@/components/theme-provider';
-import {materialSymbolsOutlined, robotoFlex} from './fonts';
+import {robotoFlex} from './fonts';
 
 export const metadata: Metadata = {
   title: 'Bharath K Malviya',
@@ -391,10 +405,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({children}: {children: ReactNode}) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={`${robotoFlex.variable} ${materialSymbolsOutlined.variable}`}>
+    <html lang="en" suppressHydrationWarning className={robotoFlex.variable}>
       <body>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
@@ -403,11 +414,26 @@ export default function RootLayout({children}: {children: ReactNode}) {
 }
 ```
 
-- [ ] **Step 3: Apply Roboto Flex as the base body typeface**
+`material-symbols/outlined.css` registers `@font-face { font-family: "Material Symbols
+Outlined"; ... }` (verified by fetching the package's `outlined.css` directly). Material
+Web's `<md-icon>` component already defaults to exactly that family name
+(`font-family: var(--md-icon-font, Material Symbols Outlined)` — verified in
+`@material/web`'s own compiled CSS) — so no extra CSS variable wiring is needed; importing
+the stylesheet is enough for `<md-icon>` to pick it up automatically.
 
-In `src/app/globals.css`, update the `body` rule to add the font family:
+- [ ] **Step 4: Apply Roboto Flex as the base body typeface, and remove Task 2's now-dead icon-font override**
+
+Task 2 added a `--md-icon-font: var(--font-material-symbols);` line to `src/app/globals.css`
+in anticipation of loading Material Symbols via `next/font/google`. That CSS variable
+(`--font-material-symbols`) is never defined now (Step 2 above doesn't create it), which
+would make `--md-icon-font` resolve to an invalid value and silently break `<md-icon>`'s own
+working fallback. Remove that line. Update the `body` rule to add the font family. The
+`src/app/globals.css` file should read:
 
 ```css
+@import "tailwindcss";
+@import "../styles/md-color-tokens.css";
+
 body {
   background-color: var(--md-sys-color-background);
   color: var(--md-sys-color-on-surface);
@@ -415,7 +441,7 @@ body {
 }
 ```
 
-- [ ] **Step 4: Verify the build still passes**
+- [ ] **Step 5: Verify the build still passes**
 
 ```bash
 pnpm run build
@@ -423,11 +449,11 @@ pnpm run build
 
 Expected: succeeds.
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 6: Commit**
 
 ```bash
 git add -A
-git commit -m "feat: load Roboto Flex and Material Symbols via next/font/google"
+git commit -m "feat: load Roboto Flex and Material Symbols fonts"
 ```
 
 ---

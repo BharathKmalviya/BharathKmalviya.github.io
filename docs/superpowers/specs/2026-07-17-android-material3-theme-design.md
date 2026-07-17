@@ -29,7 +29,11 @@ Google's own Material 3 Expressive design language.
 - **Typography**: Roboto Flex — Material 3's public web typeface (Google Sans is
   Google-internal-only and not licensed for outside use), loaded via `next/font/google`.
 - **Iconography**: Material Symbols — Google's icon font, built to pair natively with
-  Material Web components. Replaces Lucide React, also loaded via `next/font/google`.
+  Material Web components. Replaces Lucide React. Loaded via the `material-symbols` npm
+  package (self-hosted CSS + font files, Apache-2.0), not `next/font/google` — Google's
+  regular-typeface catalog that `next/font/google` draws from doesn't include Material
+  Symbols at all; it lives in a separate icon-font catalog. Discovered during Task 3's
+  implementation; see the implementation plan for the full correction.
 - **Shape & elevation**: M3 Expressive's expressive shape system (varied shapes, not just
   rounded rectangles) and tonal-surface-plus-shadow elevation. No blur/glassmorphism.
 - **Hero & cards**: The previous Kobweb site's typewriter hero-text effect and
