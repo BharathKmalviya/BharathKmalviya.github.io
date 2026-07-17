@@ -1,7 +1,7 @@
 import {
   Hct,
   MaterialDynamicColors,
-  SchemeExpressive,
+  SchemeVibrant,
   argbFromHex,
   hexFromArgb,
 } from '@material/material-color-utilities';
@@ -37,7 +37,7 @@ function toKebabCase(role) {
  */
 export function generateTokens(seedHex, isDark, contrastLevel = 0.0) {
   const sourceHct = Hct.fromInt(argbFromHex(seedHex));
-  const scheme = new SchemeExpressive(sourceHct, isDark, contrastLevel);
+  const scheme = new SchemeVibrant(sourceHct, isDark, contrastLevel);
 
   const tokens = {};
   for (const role of COLOR_ROLES) {
