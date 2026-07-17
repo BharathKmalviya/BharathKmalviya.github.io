@@ -1,11 +1,8 @@
 @import "tailwindcss";
 @import "../styles/md-color-tokens.css";
 
-:root {
-  --md-icon-font: var(--font-material-symbols);
-}
-
 body {
   background-color: var(--md-sys-color-background);
   color: var(--md-sys-color-on-surface);
+  font-family: var(--font-roboto-flex), system-ui, sans-serif;
 }
