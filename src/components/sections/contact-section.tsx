@@ -1,6 +1,7 @@
 'use client';
 
-import {motion, useReducedMotion} from 'framer-motion';
+import {motion} from 'framer-motion';
+import {useSafeReducedMotion} from '@/lib/use-safe-reduced-motion';
 import {CopyEmailButton} from '@/components/ui/copy-email-button';
 import {EmailIcon, GitHubIcon, LinkedInIcon, TwitterXIcon} from '@/components/icons/social-icons';
 import {portfolio} from '@/data/portfolio';
@@ -13,7 +14,7 @@ const ICON_BY_LABEL = {
 } as const;
 
 export function ContactSection() {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = useSafeReducedMotion();
 
   return (
     <section id="contact" className="section-frame pb-[clamp(6rem,16vw,10rem)]" aria-labelledby="contact-heading">

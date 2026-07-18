@@ -1,22 +1,25 @@
 'use client';
 
-import {motion, useReducedMotion} from 'framer-motion';
+import {motion} from 'framer-motion';
+import {useSafeReducedMotion} from '@/lib/use-safe-reduced-motion';
 import {Typewriter} from '@/components/ui/typewriter';
 import {portfolio} from '@/data/portfolio';
 
 const ease = {type: 'spring' as const, stiffness: 140, damping: 22};
 
 export function HeroTerminal() {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = useSafeReducedMotion();
 
-  const item = (delay: number) =>
-    reduceMotion
-      ? {}
-      : {
-          initial: {opacity: 0, y: 24},
-          animate: {opacity: 1, y: 0},
-          transition: {...ease, delay},
-        };
+  // `animate`/`transition` stay present regardless of `reduceMotion` so
+  // Framer Motion never abandons control of the element mid-transition
+  // (which happens if props go from fully animated to `{}` on the same
+  // instance, leaving it stuck at its pre-animation state) — only `initial`
+  // toggles to `false` to skip the fade-in.
+  const item = (delay: number) => ({
+    initial: reduceMotion ? false : {opacity: 0, y: 24},
+    animate: {opacity: 1, y: 0},
+    transition: {...ease, delay},
+  });
 
   return (
     <section

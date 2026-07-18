@@ -1,10 +1,11 @@
 'use client';
 
-import {motion, useReducedMotion} from 'framer-motion';
+import {motion} from 'framer-motion';
+import {useSafeReducedMotion} from '@/lib/use-safe-reduced-motion';
 import {portfolio} from '@/data/portfolio';
 
 export function EducationSection() {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = useSafeReducedMotion();
 
   return (
     <section id="education" className="section-frame" aria-labelledby="education-heading">

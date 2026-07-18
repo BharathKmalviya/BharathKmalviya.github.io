@@ -1,7 +1,7 @@
 'use client';
 
 import {useEffect, useState} from 'react';
-import {useReducedMotion} from 'framer-motion';
+import {useSafeReducedMotion} from '@/lib/use-safe-reduced-motion';
 
 type TypewriterProps = {
   lines: string[];
@@ -9,7 +9,7 @@ type TypewriterProps = {
 };
 
 export function Typewriter({lines, className}: TypewriterProps) {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = useSafeReducedMotion();
   const fullText = lines.join('\n');
   const [displayed, setDisplayed] = useState('');
   const [done, setDone] = useState(false);
@@ -31,7 +31,7 @@ export function Typewriter({lines, className}: TypewriterProps) {
   }, [fullText, reduceMotion]);
 
   const text = reduceMotion ? fullText : displayed;
-  const showStaticCursor = Boolean(reduceMotion) || done;
+  const showStaticCursor = reduceMotion || done;
 
   return (
     <pre
