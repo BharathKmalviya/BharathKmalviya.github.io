@@ -230,10 +230,16 @@ body {
     background-color 160ms ease;
 }
 
-.nav-link:hover,
 .nav-link[aria-current="true"] {
   color: var(--terminal-neon);
   background: color-mix(in srgb, var(--terminal-neon) 10%, transparent);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .nav-link:hover {
+    color: var(--terminal-neon);
+    background: color-mix(in srgb, var(--terminal-neon) 10%, transparent);
+  }
 }
 
 .nav-link[aria-current="true"]::after {
