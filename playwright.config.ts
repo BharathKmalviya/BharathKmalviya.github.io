@@ -11,7 +11,9 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
-  reporter: process.env.CI ? 'github' : 'list',
+  // 'html' so the workflow's on-failure playwright-report/ upload actually
+  // has something in it — the 'github' reporter alone doesn't write files.
+  reporter: process.env.CI ? [['github'], ['html', {open: 'never'}]] : 'list',
   use: {
     baseURL: `http://localhost:${PORT}`,
     trace: 'on-first-retry',

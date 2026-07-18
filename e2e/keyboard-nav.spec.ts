@@ -1,16 +1,20 @@
 import {test, expect} from '@playwright/test';
 
 test.describe('keyboard navigation', () => {
-  test('every primary nav link is reachable by Tab and shows a focus indicator', async ({page}) => {
+  test('every primary nav link is reachable by Tab, in order, with a visible focus indicator', async ({page}) => {
     await page.goto('/');
     const navLinks = page.locator('nav a.nav-link');
     const count = await navLinks.count();
     expect(count).toBeGreaterThan(0);
 
+    // The "~/bharath" logo anchor is the first tabbable element on the page,
+    // ahead of the nav links themselves.
+    await page.keyboard.press('Tab');
+
     for (let i = 0; i < count; i++) {
+      await page.keyboard.press('Tab');
       const link = navLinks.nth(i);
-      await link.focus();
-      await expect(link).toBeFocused();
+      await expect(link, `Tab press ${i + 1} should land on nav link ${i}, in DOM order`).toBeFocused();
 
       const outlineVisible = await link.evaluate((el) => {
         const style = getComputedStyle(el);
