@@ -1,8 +1,13 @@
-import type {Metadata} from 'next';
+import type {Metadata, Viewport} from 'next';
 import type {ReactNode} from 'react';
 import './globals.css';
 import {jetbrainsMono} from './fonts';
 import {portfolio} from '@/data/portfolio';
+
+export const viewport: Viewport = {
+  themeColor: '#070807',
+  colorScheme: 'dark',
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(portfolio.siteUrl),
@@ -14,11 +19,13 @@ export const metadata: Metadata = {
   keywords: portfolio.seo.keywords,
   authors: [{name: portfolio.name, url: portfolio.siteUrl}],
   creator: portfolio.name,
+  applicationName: portfolio.name,
+  category: 'technology',
   openGraph: {
     type: 'website',
     locale: 'en_IN',
     url: portfolio.siteUrl,
-    siteName: portfolio.name,
+    siteName: 'bharathmalviya.com',
     title: portfolio.seo.title,
     description: portfolio.seo.description,
   },
@@ -31,9 +38,16 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
   },
   alternates: {
     canonical: portfolio.siteUrl,
+  },
+  other: {
+    'format-detection': 'telephone=no',
   },
 };
 

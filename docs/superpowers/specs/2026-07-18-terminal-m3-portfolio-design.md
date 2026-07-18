@@ -1,4 +1,10 @@
-# Terminal Skin on Material 3 — Portfolio Expansion Design
+# Terminal Portfolio — Design Spec (production)
+
+> **Production status (2026-07-19):** Material Web / M3 token overlay was
+> dropped. The live site is a **custom dark terminal UI** (native buttons,
+> JetBrains Mono, Framer Motion). Constitution v3.0.0 is the governance
+> source of truth. This file remains for historical context of the section
+> structure and content decisions; ignore Material-specific requirements below.
 
 ## Context
 

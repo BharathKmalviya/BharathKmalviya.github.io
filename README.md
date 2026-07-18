@@ -1,16 +1,46 @@
-# Portfolio Website
+# Portfolio — bharathmalviya.com
 
-React-based rewrite in progress on this branch (`feature/react-portfolio`), built with Next.js, TypeScript, and Google's Material Web (Material 3 Expressive) — an authentically Google-styled visual identity reflecting the author's background as an Android developer.
+Production personal site for **Bharath Malviya**, Senior Android Developer at MagicDecor.
 
-The previous Kobweb (Kotlin/JS) implementation is preserved on the `archive/kobweb-kotlin` branch. `master` will be merged/overridden with this branch once the rewrite is complete.
+**Live:** [https://bharathmalviya.com](https://bharathmalviya.com)
 
-See `CLAUDE.md` for the full tech stack and links to the project constitution and design docs.
+## Stack
+
+- Next.js 16 (App Router, static export)
+- TypeScript, Tailwind CSS v4, Framer Motion
+- Dark terminal UI (JetBrains Mono, neon `#3DDC84`)
+- Hosted on GitHub Pages from `master`
+
+## Develop
+
+```bash
+pnpm install
+pnpm dev
+```
+
+```bash
+pnpm run lint
+pnpm run build   # writes static site to out/
+```
+
+## Deploy
+
+Pushes to `master` run `.github/workflows/deploy.yml` (pnpm build → upload `out/` → GitHub Pages). Custom domain is set via `public/CNAME`.
+
+## Content
+
+Edit `src/data/portfolio.ts` for profile copy, experience, education, skills, and SEO.
+
+## Docs
+
+- Constitution: `.specify/memory/constitution.md` (v3.0.0)
+- Agent notes: `CLAUDE.md`
+- Historical design notes: `docs/superpowers/specs/` (includes superseded Material 3 exploration)
 
 ## Author
 
-**Bharath K Malviya**
+**Bharath Malviya**
 
-- LinkedIn: [bharath-k-malviya](https://linkedin.com/in/bharath-k-malviya)
+- LinkedIn: [bharath-k-malviya](https://www.linkedin.com/in/bharath-k-malviya)
 - GitHub: [BharathKmalviya](https://github.com/BharathKmalviya)
-- Twitter/X: [@BharathKmalviya](https://x.com/BharathKmalviya)
-- Portfolio: [bharathmalviya.com](http://bharathmalviya.com/)
+- X: [@BharathKmalviya](https://x.com/BharathKmalviya)
