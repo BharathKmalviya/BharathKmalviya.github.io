@@ -1,10 +1,4 @@
-import {JetBrains_Mono, Roboto_Flex} from 'next/font/google';
-
-export const robotoFlex = Roboto_Flex({
-  subsets: ['latin'],
-  variable: '--font-roboto-flex',
-  display: 'swap',
-});
+import {JetBrains_Mono} from 'next/font/google';
 
 export const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],

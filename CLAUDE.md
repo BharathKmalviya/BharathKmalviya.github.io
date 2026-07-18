@@ -8,9 +8,10 @@ This portfolio is being rewritten as a React app on the `feature/react-portfolio
 
 ## Tech Stack & Design
 
-- **Stack**: Next.js 16 (App Router, static export), TypeScript, Tailwind CSS v4, Material Web (`@material/web`, rendered as client components — a brief hydration flash on first paint is an accepted trade-off), Framer Motion, `next-themes`. Contact for the current pass is copy-email + `mailto:` (EmailJS + React Hook Form + Zod when a form ships). Hosted on GitHub Pages (`bharathmalviya.com`).
-- **Visual design**: Terminal skin on Material 3 tokens — near-black surfaces, neon accents from Android seed `#3DDC84`, Roboto Flex + JetBrains Mono, Material Symbols. Interactive controls stay on `@material/web`; chrome/typewriter/code previews may be custom.
-- **Full detail**: principles in `.specify/memory/constitution.md` (v2.1.0); presentation in `docs/superpowers/specs/2026-07-18-terminal-m3-portfolio-design.md`; M3 token foundation in `docs/superpowers/specs/2026-07-17-android-material3-theme-design.md`. Treat these as the source of truth — update them whenever a decision changes, don't just repeat context in chat.
+- **Stack**: Next.js 16 (App Router, static export), TypeScript, Tailwind CSS v4, Framer Motion. Contact for the current pass is copy-email + `mailto:` (EmailJS form deferred). Hosted on GitHub Pages (`bharathmalviya.com`).
+- **Visual design**: Dark terminal aesthetic — near-black surfaces, neon Android green `#3DDC84`, JetBrains Mono throughout. Native HTML buttons (no Material Web / Material Symbols).
+- **Full detail**: principles in `.specify/memory/constitution.md` (needs amendment to drop M3 — current code has moved off Material); presentation direction in `docs/superpowers/specs/2026-07-18-terminal-m3-portfolio-design.md` (also partially superseded by the no-Material decision). Update those docs when syncing Speckit.
+
 
 ## Git Workflow
 

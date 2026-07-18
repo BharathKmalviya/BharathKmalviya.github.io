@@ -6,16 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
-    "generate:theme": "node scripts/generate-theme-tokens.mjs"
+    "lint": "eslint"
   },
   "dependencies": {
-    "@material/material-color-utilities": "^0.4.0",
-    "@material/web": "^2.5.0",
     "framer-motion": "^12.42.2",
-    "material-symbols": "^0.45.8",
     "next": "16.2.10",
-    "next-themes": "^0.4.6",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },

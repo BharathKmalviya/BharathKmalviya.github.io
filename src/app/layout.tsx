@@ -1,24 +1,95 @@
 import type {Metadata} from 'next';
 import type {ReactNode} from 'react';
-import 'material-symbols/outlined.css';
 import './globals.css';
-import {ThemeProvider} from '@/components/theme-provider';
-import {jetbrainsMono, robotoFlex} from './fonts';
+import {jetbrainsMono} from './fonts';
+import {portfolio} from '@/data/portfolio';
 
 export const metadata: Metadata = {
-  title: 'Bharath K Malviya',
-  description: 'Android developer portfolio',
+  metadataBase: new URL(portfolio.siteUrl),
+  title: {
+    default: portfolio.seo.title,
+    template: `%s | ${portfolio.name}`,
+  },
+  description: portfolio.seo.description,
+  keywords: portfolio.seo.keywords,
+  authors: [{name: portfolio.name, url: portfolio.siteUrl}],
+  creator: portfolio.name,
+  openGraph: {
+    type: 'website',
+    locale: 'en_IN',
+    url: portfolio.siteUrl,
+    siteName: portfolio.name,
+    title: portfolio.seo.title,
+    description: portfolio.seo.description,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: portfolio.seo.title,
+    description: portfolio.seo.description,
+    creator: '@BharathKmalviya',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  alternates: {
+    canonical: portfolio.siteUrl,
+  },
+};
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: portfolio.name,
+  jobTitle: portfolio.role,
+  description: portfolio.seo.description,
+  url: portfolio.siteUrl,
+  email: portfolio.email,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Mumbai',
+    addressRegion: 'Maharashtra',
+    addressCountry: 'IN',
+  },
+  worksFor: {
+    '@type': 'Organization',
+    name: 'MagicDecor',
+  },
+  alumniOf: portfolio.education.map((edu) => ({
+    '@type': 'EducationalOrganization',
+    name: edu.school,
+  })),
+  sameAs: portfolio.socials.filter((s) => !s.href.startsWith('mailto:')).map((s) => s.href),
+  knowsAbout: [
+    'Android',
+    'Kotlin',
+    'Java',
+    'Jetpack Compose',
+    'Clean Architecture',
+    'MVVM',
+    'Dagger Hilt',
+    'Room',
+    'Firebase',
+    'Kotlin Coroutines',
+    'Kotlin Flow',
+    'StateFlow',
+    'WorkManager',
+    'Retrofit',
+    'offline-first architecture',
+    'CI/CD',
+    'performance optimization',
+  ],
 };
 
 export default function RootLayout({children}: {children: ReactNode}) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={`${robotoFlex.variable} ${jetbrainsMono.variable}`}
-    >
+    <html lang="en" className={`dark ${jetbrainsMono.variable}`}>
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{__html: JSON.stringify(jsonLd)}}
+        />
+        {children}
       </body>
     </html>
   );
