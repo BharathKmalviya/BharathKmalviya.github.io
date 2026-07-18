@@ -17,10 +17,9 @@ This supersedes the purely tonal M3 landing look for the main portfolio
 surface. The Android seed green `#3DDC84` remains the accent source so the
 site still reads as “Android developer,” not generic cyberpunk purple.
 
-**Follow-up (deferred to end of implementation):** update Speckit —
-constitution Principle III / Technology & Hosting Constraints, and agent
-context — so documentation matches this visual system. Tracked explicitly
-by user request.
+**Speckit sync:** Constitution amended to **v2.1.0** (2026-07-18) for
+terminal-on-M3 presentation, Principle III client-component correction, and
+copy-email contact guidance. `CLAUDE.md` Tech Stack & Design updated to match.
 
 ## Decision Summary
 
@@ -140,8 +139,7 @@ src/
 - Light-mode terminal variant.
 - Live GitHub API contribution fetching.
 - Replacing Material Web with a different component library.
-- Speckit/constitution amendment — **scheduled after implementation completes**
-  per user request (“update Speckit when all done”).
+- Speckit/constitution amendment for this visual system (done in v2.1.0).
 
 ## Relationship to Prior Specs
 
