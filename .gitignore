@@ -73,8 +73,10 @@ kotlin-js-store
 # Git worktrees
 .worktrees/
 
-# Spec Kit
-.specify/
+# Spec Kit (keep memory/constitution tracked; ignore scripts/templates locally)
+.specify/*
+!.specify/memory/
+!.specify/memory/**
 
 # AI tool configs
 .claude/
