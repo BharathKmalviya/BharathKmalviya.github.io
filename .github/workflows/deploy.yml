@@ -1,7 +1,16 @@
 name: Deploy to GitHub Pages
 
+# Production: BharathKmalviya.github.io → https://bharathmalviya.com
+# Pages is already set to "GitHub Actions" (build_type: workflow) on master.
+#
+# - pull_request → master: lint + static build (no deploy)
+# - push → master / workflow_dispatch: build + deploy out/ to Pages
+
 on:
   push:
+    branches:
+      - master
+  pull_request:
     branches:
       - master
   workflow_dispatch:
@@ -12,74 +21,66 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  group: pages-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-    defaults:
-      run:
-        shell: bash
-
-    env:
-      KOBWEB_CLI_VERSION: 0.9.21
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up JDK
-        uses: actions/setup-java@v4
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
         with:
-          distribution: temurin
-          java-version: '11'
+          version: 10
 
-      - name: Ensure Gradle is executable
-        run: chmod +x gradlew
-
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
-
-      - name: Query Browser Cache ID
-        id: browser-cache-id
-        run: echo "value=$(./gradlew -q :site:kobwebBrowserCacheId)" >> $GITHUB_OUTPUT
-
-      - name: Cache Browser Dependencies
-        uses: actions/cache@v4
-        id: playwright-cache
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ steps.browser-cache-id.outputs.value }}
+          node-version: 22
+          cache: pnpm
 
-      - name: Fetch kobweb
-        uses: robinraju/release-downloader@v1.9
-        with:
-          repository: "varabyte/kobweb-cli"
-          tag: "v${{ env.KOBWEB_CLI_VERSION }}"
-          fileName: "kobweb-${{ env.KOBWEB_CLI_VERSION }}.zip"
-          tarBall: false
-          zipBall: false
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
-      - name: Unzip kobweb
-        run: unzip kobweb-${{ env.KOBWEB_CLI_VERSION }}.zip
+      - name: Lint
+        run: pnpm run lint
 
-      - name: Run export
+      - name: Unit tests
+        run: pnpm run test
+
+      - name: Build static export
+        run: pnpm run build
+
+      - name: Verify Pages artifacts
         run: |
-          cd site
-          ../kobweb-${{ env.KOBWEB_CLI_VERSION }}/bin/kobweb export --notty --layout static
+          test -f out/index.html
+          test -f out/CNAME
+          test -f out/.nojekyll
+          test -d out/_next
+          echo "CNAME=$(cat out/CNAME)"
+          ls -la out | head -n 30
 
       - name: Setup Pages
-        uses: actions/configure-pages@v4
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        uses: actions/configure-pages@v5
 
-      - name: Upload artifact
+      - name: Upload Pages artifact
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './site/.kobweb/site'
+          path: out
 
+  deploy:
+    if: github.ref == 'refs/heads/master' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
