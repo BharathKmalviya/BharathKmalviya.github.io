@@ -331,6 +331,15 @@ body {
   animation: cursor-blink 1s steps(1) infinite;
 }
 
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
