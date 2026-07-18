@@ -48,7 +48,7 @@ export function SiteNav() {
           onClick={() => setActive(null)}>
           <span className="text-[var(--text-muted)]">~/</span>bharath
         </a>
-        <ul className="flex items-center gap-0.5 overflow-x-auto sm:gap-1">
+        <ul className="no-scrollbar flex items-center gap-0.5 overflow-x-auto sm:gap-1">
           {NAV.map((item) => (
             <li key={item.href}>
               <a
