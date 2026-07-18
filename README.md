@@ -25,7 +25,11 @@ pnpm run build   # writes static site to out/
 
 ## Deploy
 
-Pushes to `master` run `.github/workflows/deploy.yml` (pnpm build → upload `out/` → GitHub Pages). Custom domain is set via `public/CNAME`.
+Pushes / merges to `master` run [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) (pnpm build → upload `out/` → GitHub Pages). Custom domain: `public/CNAME`.
+
+PRs targeting `master` run lint, tests, and build only (no deploy) so CI can verify before merge.
+
+See [docs/deployment.md](docs/deployment.md) for the full checklist and verified Pages settings.
 
 ## Content
 

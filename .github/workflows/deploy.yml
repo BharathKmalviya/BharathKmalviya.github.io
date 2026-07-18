@@ -1,7 +1,16 @@
 name: Deploy to GitHub Pages
 
+# Production: BharathKmalviya.github.io → https://bharathmalviya.com
+# Pages is already set to "GitHub Actions" (build_type: workflow) on master.
+#
+# - pull_request → master: lint + static build (no deploy)
+# - push → master / workflow_dispatch: build + deploy out/ to Pages
+
 on:
   push:
+    branches:
+      - master
+  pull_request:
     branches:
       - master
   workflow_dispatch:
@@ -12,8 +21,8 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
-  cancel-in-progress: false
+  group: pages-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -24,6 +33,8 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
+        with:
+          version: 10
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -37,18 +48,33 @@ jobs:
       - name: Lint
         run: pnpm run lint
 
+      - name: Unit tests
+        run: pnpm run test
+
       - name: Build static export
         run: pnpm run build
 
+      - name: Verify Pages artifacts
+        run: |
+          test -f out/index.html
+          test -f out/CNAME
+          test -f out/.nojekyll
+          test -d out/_next
+          echo "CNAME=$(cat out/CNAME)"
+          ls -la out | head -n 30
+
       - name: Setup Pages
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
         uses: actions/configure-pages@v5
 
-      - name: Upload artifact
+      - name: Upload Pages artifact
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
         uses: actions/upload-pages-artifact@v3
         with:
           path: out
 
   deploy:
+    if: github.ref == 'refs/heads/master' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     needs: build
     runs-on: ubuntu-latest
     environment:
