@@ -2,6 +2,22 @@
 
 <!--
 Sync Impact Report
+Version change: 3.0.0 → 3.1.0
+Modified principles: none
+Added principles:
+  - VIII. Browser-Verified UI/UX Regression Testing — Playwright E2E suite
+    required in CI for touch/hover/viewport/accessibility behavior unit tests
+    cannot observe
+Added sections: none
+Modified sections:
+  - Technology & Hosting Constraints — added Playwright/@axe-core testing stack
+Removed sections: none
+Templates requiring updates: ⚠ plan/spec templates unchanged (generic)
+Follow-up TODOs: none
+-->
+
+<!--
+Sync Impact Report (previous)
 Version change: 2.1.0 → 3.0.0
 Modified principles:
   - III. Typed, Material-Web Component-Based UI → III. Typed, Component-Based UI
@@ -106,6 +122,21 @@ MUST stay current with the live implementation.
 
 **Rationale**: Sessions are discontinuous; docs carry decisions forward.
 
+### VIII. Browser-Verified UI/UX Regression Testing
+
+A Playwright E2E suite (`e2e/*.spec.ts`) MUST run in CI on every PR to
+`master`, alongside unit tests, as a required check. Any UI/UX bug found
+through manual or screenshot review (mobile viewport issues, touch/hover CSS
+behavior, scrollbar/overflow glitches, active-state logic, accessibility
+regressions) MUST get a regression test in this suite, not just a one-off
+fix — jsdom-based unit tests cannot observe real browser CSS media features
+(`hover`, `pointer`), touch interaction, or rendered scrollbars.
+
+**Rationale**: Explicit user directive after two shipped bugs (a visible
+mobile scrollbar and a stuck touch-hover nav state) that unit tests alone
+could not have caught; the owner should not have to manually re-check this
+class of regression on every change.
+
 ## Technology & Hosting Constraints
 
 - **Framework/Language**: Next.js 16 (App Router, `output: 'export'`),
@@ -113,6 +144,8 @@ MUST stay current with the live implementation.
 - **Motion**: Framer Motion for scroll/entrance orchestration and typewriter
   reduced-motion handling.
 - **Typography**: JetBrains Mono via `next/font/google`.
+- **Testing**: Vitest for unit logic; Playwright + `@axe-core/playwright` for
+  E2E/UI-UX/accessibility regression coverage, run in CI on every PR.
 - **Visual design**: Dark terminal — `#070807` / surface panels, neon
   `#3DDC84`, ambient CSS atmosphere. Content source: `src/data/portfolio.ts`.
 - **Contact**: Copy-email button + `mailto:` (no server). EmailJS MAY be
@@ -154,4 +187,4 @@ user approval and a version bump:
 `/speckit-plan` and `/speckit-tasks` output MUST verify compliance; unresolved
 violations go in Complexity Tracking with justification.
 
-**Version**: 3.0.0 | **Ratified**: 2026-07-17 | **Last Amended**: 2026-07-19
+**Version**: 3.1.0 | **Ratified**: 2026-07-17 | **Last Amended**: 2026-07-18

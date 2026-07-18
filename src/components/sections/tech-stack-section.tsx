@@ -1,10 +1,11 @@
 'use client';
 
-import {motion, useReducedMotion} from 'framer-motion';
+import {motion} from 'framer-motion';
+import {useSafeReducedMotion} from '@/lib/use-safe-reduced-motion';
 import {portfolio} from '@/data/portfolio';
 
 export function TechStackSection() {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = useSafeReducedMotion();
 
   return (
     <section id="tech" className="section-frame section-frame--wide" aria-labelledby="tech-heading">
