@@ -242,19 +242,6 @@ body {
   }
 }
 
-.nav-link[aria-current="true"]::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: 0.2rem;
-  width: 0.35rem;
-  height: 0.35rem;
-  border-radius: 50%;
-  background: var(--terminal-neon);
-  transform: translateX(-50%);
-  box-shadow: 0 0 10px var(--terminal-neon);
-}
-
 .btn {
   display: inline-flex;
   align-items: center;
