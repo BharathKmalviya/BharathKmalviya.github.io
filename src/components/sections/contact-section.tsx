@@ -17,7 +17,10 @@ export function ContactSection() {
   const reduceMotion = useSafeReducedMotion();
 
   return (
-    <section id="contact" className="section-frame pb-[clamp(6rem,16vw,10rem)]" aria-labelledby="contact-heading">
+    <section
+      id="contact"
+      className="section-frame section-frame--wide pb-[clamp(6rem,16vw,10rem)]"
+      aria-labelledby="contact-heading">
       <p className="section-kicker">{'// contact'}</p>
       <h2 id="contact-heading" className="section-title">
         {portfolio.contactTitle}

@@ -4,7 +4,7 @@ import {portfolio} from '@/data/portfolio';
 
 export function AboutSection() {
   return (
-    <section id="about" className="section-frame" aria-labelledby="about-heading">
+    <section id="about" className="section-frame section-frame--wide" aria-labelledby="about-heading">
       <p className="section-kicker">{'// about'}</p>
       <h2 id="about-heading" className="section-title">
         {portfolio.aboutTitle}
