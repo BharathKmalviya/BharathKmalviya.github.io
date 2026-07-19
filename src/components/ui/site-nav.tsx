@@ -1,6 +1,7 @@
 'use client';
 
 import {useEffect, useState} from 'react';
+import {updateActiveSection} from '@/lib/section-scroll-spy';
 
 const SECTIONS = ['about', 'experience', 'education', 'tech', 'contact'] as const;
 
@@ -21,16 +22,21 @@ export function SiteNav() {
     );
     if (!nodes.length) return;
 
+    const overlapping = new Map<string, boolean>();
+
     const observer = new IntersectionObserver(
       (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-        if (visible[0]?.target.id) {
-          setActive(visible[0].target.id);
-        }
+        const sectionEntries = entries.map((entry) => ({
+          id: entry.target.id,
+          isIntersecting: entry.isIntersecting,
+        }));
+        setActive(updateActiveSection(overlapping, sectionEntries, SECTIONS));
       },
-      {rootMargin: '-35% 0px -45% 0px', threshold: [0.15, 0.4, 0.7]},
+      // A thin reference line ~35% down the viewport, not a tall band —
+      // intersectionRatio is relative to each *target's own height*, so a
+      // tall band compared against a fixed ratio threshold is unreliable
+      // across sections of very different heights (see section-scroll-spy.ts).
+      {rootMargin: '-35% 0px -64% 0px', threshold: 0},
     );
 
     for (const node of nodes) observer.observe(node);
