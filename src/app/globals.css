@@ -11,7 +11,7 @@
   --text: #e8ece9;
   --text-muted: #8f9e94;
   --page-pad-x: clamp(1.25rem, 4vw, 2.5rem);
-  --section-y: clamp(5rem, 12vw, 8.5rem);
+  --section-y: clamp(3rem, 7vw, 5.5rem);
   --content-max: 42rem;
   --content-wide: 56rem;
 }

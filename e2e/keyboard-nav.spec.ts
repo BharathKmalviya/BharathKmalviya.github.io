@@ -7,7 +7,7 @@ test.describe('keyboard navigation', () => {
     const count = await navLinks.count();
     expect(count).toBeGreaterThan(0);
 
-    // The "~/bharath" logo anchor is the first tabbable element on the page,
+    // The "~/bharath-malviya" logo anchor is the first tabbable element on the page,
     // ahead of the nav links themselves.
     await page.keyboard.press('Tab');
 

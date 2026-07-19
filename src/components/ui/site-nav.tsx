@@ -2,6 +2,9 @@
 
 import {useEffect, useState} from 'react';
 import {updateActiveSection} from '@/lib/section-scroll-spy';
+import {portfolio} from '@/data/portfolio';
+
+const BRAND_SLUG = portfolio.name.toLowerCase().replace(/\s+/g, '-');
 
 const SECTIONS = ['about', 'experience', 'education', 'tech', 'contact'] as const;
 
@@ -52,7 +55,8 @@ export function SiteNav() {
           href="#top"
           className="shrink-0 text-[0.8125rem] tracking-wide text-[var(--terminal-neon)] transition-opacity hover:opacity-80"
           onClick={() => setActive(null)}>
-          <span className="text-[var(--text-muted)]">~/</span>bharath
+          <span className="text-[var(--text-muted)]">~/</span>
+          {BRAND_SLUG}
         </a>
         <ul className="no-scrollbar flex items-center gap-0.5 overflow-x-auto sm:gap-1">
           {NAV.map((item) => (

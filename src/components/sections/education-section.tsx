@@ -8,12 +8,12 @@ export function EducationSection() {
   const reduceMotion = useSafeReducedMotion();
 
   return (
-    <section id="education" className="section-frame" aria-labelledby="education-heading">
+    <section id="education" className="section-frame section-frame--wide" aria-labelledby="education-heading">
       <p className="section-kicker">{'// education'}</p>
       <h2 id="education-heading" className="section-title">
         {portfolio.educationTitle}
       </h2>
-      <ul className="flex flex-col gap-5">
+      <ul className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         {portfolio.education.map((item, index) => (
           <motion.li
             key={item.id}
