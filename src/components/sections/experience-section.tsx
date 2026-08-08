@@ -13,11 +13,11 @@ export function ExperienceSection() {
       <h2 id="experience-heading" className="section-title">
         {portfolio.experienceTitle}
       </h2>
-      <ol className="mt-2 flex flex-col gap-10">
+      <ol className="mt-2 flex flex-col">
         {portfolio.experience.map((job, index) => (
           <motion.li
             key={job.id}
-            className="relative border-l border-[var(--terminal-border)] pl-6"
+            className="relative border-l border-[var(--terminal-border)] pb-10 pl-6 last:pb-0"
             initial={reduceMotion ? false : {opacity: 0, x: -12}}
             whileInView={{opacity: 1, x: 0}}
             viewport={{once: true, margin: '-8% 0px'}}
