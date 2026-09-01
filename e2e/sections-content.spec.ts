@@ -30,30 +30,45 @@ test.describe('section content matches src/data/portfolio.ts', () => {
     }
   });
 
-  test('Education renders every school and degree', async ({page}) => {
+  test('Education renders every school in the About status panel', async ({page}) => {
+    // Education is no longer its own section — for a senior developer it reads
+    // as a footnote, so it lives as one line per school in the About panel.
     await page.goto('/');
-    const education = page.locator('#education');
-    await education.scrollIntoViewIfNeeded();
-
-    const items = education.locator('ul > li');
-    await expect(items).toHaveCount(portfolio.education.length);
+    const about = page.locator('#about');
+    await about.scrollIntoViewIfNeeded();
 
     for (const item of portfolio.education) {
-      await expect(education).toContainText(item.school);
-      await expect(education).toContainText(item.degree);
+      await expect(about).toContainText(item.school);
+      // The panel shows the abbreviation ("MCA"), not the full degree name.
+      const abbreviation = item.degree.match(/\(([^)]+)\)/)?.[1] ?? item.degree;
+      await expect(about).toContainText(abbreviation);
     }
   });
 
-  test('Skills renders every tech item', async ({page}) => {
+  test('Skills renders every capability group and chip', async ({page}) => {
     await page.goto('/');
     const tech = page.locator('#tech');
     await tech.scrollIntoViewIfNeeded();
 
-    const items = tech.locator('ul > li');
-    await expect(items).toHaveCount(portfolio.tech.length);
+    for (const group of portfolio.skillGroups) {
+      await expect(tech).toContainText(group.title);
+      for (const chip of group.chips) {
+        await expect(tech).toContainText(chip);
+      }
+    }
+  });
 
-    for (const item of portfolio.tech) {
-      await expect(tech).toContainText(item.label);
+  test('Featured Work renders every project', async ({page}) => {
+    await page.goto('/');
+    const work = page.locator('#work');
+    await work.scrollIntoViewIfNeeded();
+
+    const cards = work.locator('article');
+    await expect(cards).toHaveCount(portfolio.projects.length);
+
+    for (const project of portfolio.projects) {
+      await expect(work).toContainText(project.title);
+      await expect(work).toContainText(project.summary);
     }
   });
 });

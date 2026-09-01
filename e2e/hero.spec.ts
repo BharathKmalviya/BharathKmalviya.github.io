@@ -10,10 +10,18 @@ test.describe('hero section', () => {
     await expect(hero).toContainText(portfolio.company);
   });
 
-  test('"About me" button scrolls to the About section', async ({page}) => {
+  test('"See my work" button scrolls to the Featured Work section', async ({page}) => {
     await page.goto('/');
-    await page.getByRole('button', {name: 'About me'}).click();
-    await expect(page.locator('#about')).toBeInViewport();
+    await page.getByRole('button', {name: 'See my work'}).click();
+    await expect(page.locator('#work')).toBeInViewport();
+  });
+
+  test('shows the career stat strip', async ({page}) => {
+    await page.goto('/');
+    const hero = page.locator('#top');
+    for (const stat of portfolio.stats) {
+      await expect(hero).toContainText(stat.label);
+    }
   });
 
   test('"Get in touch" button scrolls to the Contact section', async ({page}) => {
