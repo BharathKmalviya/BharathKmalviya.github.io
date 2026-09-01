@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 760" width="360" height="760">
+  <defs>
+    <linearGradient id="call" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1d5c3a"/>
+      <stop offset="1" stop-color="#0f2e1e"/>
+    </linearGradient>
+  </defs>
+  <rect width="360" height="760" fill="#0c100d"/>
+  <!-- status bar -->
+  <rect x="24" y="40" width="34" height="10" rx="5" fill="#e8ece9" opacity="0.85"/>
+  <circle cx="296" cy="45" r="4" fill="#8f9e94"/>
+  <rect x="308" y="41" width="8" height="8" rx="2" fill="#8f9e94"/>
+  <rect x="324" y="40" width="16" height="9" rx="3" fill="#3ddc84"/>
+  <!-- chat header -->
+  <circle cx="46" cy="92" r="18" fill="url(#call)"/>
+  <circle cx="59" cy="104" r="5" fill="#3ddc84" stroke="#0c100d" stroke-width="2"/>
+  <rect x="76" y="78" width="110" height="12" rx="6" fill="#e8ece9" opacity="0.9"/>
+  <rect x="76" y="98" width="64" height="8" rx="4" fill="#3ddc84" opacity="0.8"/>
+  <circle cx="290" cy="92" r="16" fill="#121812" stroke="#1e2b22"/>
+  <path d="M284 92 h8 m0 -3 l5 -3 v12 l-5 -3" fill="#3ddc84" stroke="#3ddc84" stroke-width="1.5"/>
+  <circle cx="330" cy="92" r="16" fill="#121812" stroke="#1e2b22"/>
+  <path d="M325 87 a10 10 0 0 1 10 10" fill="none" stroke="#3ddc84" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- video call PiP -->
+  <rect x="200" y="128" width="136" height="180" rx="16" fill="url(#call)" stroke="#3ddc84" stroke-opacity="0.6"/>
+  <circle cx="268" cy="200" r="30" fill="#3ddc84" opacity="0.35"/>
+  <circle cx="268" cy="188" r="13" fill="#3ddc84" opacity="0.7"/>
+  <path d="M245 232 a24 14 0 0 1 46 0" fill="#3ddc84" opacity="0.7"/>
+  <rect x="214" y="276" width="26" height="18" rx="6" fill="#0c100d" opacity="0.7"/>
+  <rect x="296" y="276" width="26" height="18" rx="6" fill="#ff5f56" opacity="0.9"/>
+  <rect x="212" y="140" width="56" height="16" rx="8" fill="#0c100d" opacity="0.75"/>
+  <circle cx="222" cy="148" r="3.5" fill="#ff5f56"/>
+  <rect x="230" y="145" width="30" height="6" rx="3" fill="#e8ece9" opacity="0.7"/>
+  <!-- incoming bubbles -->
+  <rect x="24" y="140" width="160" height="48" rx="16" fill="#121812" stroke="#1e2b22"/>
+  <rect x="40" y="156" width="120" height="8" rx="4" fill="#8f9e94"/>
+  <rect x="40" y="170" width="80" height="7" rx="3.5" fill="#2a3a2f"/>
+  <rect x="24" y="326" width="190" height="48" rx="16" fill="#121812" stroke="#1e2b22"/>
+  <rect x="40" y="342" width="150" height="8" rx="4" fill="#8f9e94"/>
+  <rect x="40" y="356" width="100" height="7" rx="3.5" fill="#2a3a2f"/>
+  <!-- outgoing bubble -->
+  <rect x="140" y="390" width="196" height="64" rx="16" fill="#193526"/>
+  <rect x="156" y="406" width="150" height="8" rx="4" fill="#3ddc84" opacity="0.85"/>
+  <rect x="156" y="422" width="110" height="8" rx="4" fill="#3ddc84" opacity="0.45"/>
+  <rect x="286" y="438" width="34" height="6" rx="3" fill="#3ddc84" opacity="0.5"/>
+  <!-- voice note -->
+  <rect x="24" y="470" width="200 " height="48" rx="16" fill="#121812" stroke="#1e2b22"/>
+  <circle cx="52" cy="494" r="14" fill="#3ddc84"/>
+  <path d="M48 488 v12 l10 -6 z" fill="#00391f"/>
+  <g fill="#3ddc84" opacity="0.7">
+    <rect x="76" y="488" width="3" height="12" rx="1.5"/><rect x="84" y="483" width="3" height="22" rx="1.5"/>
+    <rect x="92" y="490" width="3" height="8" rx="1.5"/><rect x="100" y="480" width="3" height="28" rx="1.5"/>
+    <rect x="108" y="486" width="3" height="16" rx="1.5"/><rect x="116" y="482" width="3" height="24" rx="1.5"/>
+    <rect x="124" y="490" width="3" height="8" rx="1.5"/><rect x="132" y="485" width="3" height="18" rx="1.5"/>
+    <rect x="140" y="488" width="3" height="12" rx="1.5"/><rect x="148" y="483" width="3" height="22" rx="1.5"/>
+    <rect x="156" y="490" width="3" height="8" rx="1.5"/><rect x="164" y="486" width="3" height="16" rx="1.5"/>
+  </g>
+  <!-- outgoing image bubble -->
+  <rect x="156" y="534" width="180" height="110" rx="16" fill="#193526"/>
+  <rect x="168" y="546" width="156" height="70" rx="10" fill="url(#call)"/>
+  <circle cx="246" cy="581" r="18" fill="#3ddc84" opacity="0.5"/>
+  <rect x="168" y="624" width="90" height="7" rx="3.5" fill="#3ddc84" opacity="0.5"/>
+  <!-- typing indicator -->
+  <rect x="24" y="660" width="76" height="34" rx="16" fill="#121812" stroke="#1e2b22"/>
+  <circle cx="48" cy="677" r="4" fill="#3ddc84"/>
+  <circle cx="62" cy="677" r="4" fill="#3ddc84" opacity="0.6"/>
+  <circle cx="76" cy="677" r="4" fill="#3ddc84" opacity="0.3"/>
+  <!-- input bar -->
+  <rect x="24" y="706" width="252" height="44" rx="22" fill="#121812" stroke="#1e2b22"/>
+  <rect x="44" y="724" width="110" height="9" rx="4.5" fill="#2a3a2f"/>
+  <circle cx="316" cy="728" r="22" fill="#3ddc84"/>
+  <path d="M308 728 l16 -7 -6 7 6 7 z" fill="#00391f"/>
+</svg>

@@ -21,11 +21,11 @@ export function ContactSection() {
       id="contact"
       className="section-frame section-frame--wide pb-[clamp(6rem,16vw,10rem)]"
       aria-labelledby="contact-heading">
-      <p className="section-kicker">{'// contact'}</p>
+      <p className="section-path">~/contact</p>
       <h2 id="contact-heading" className="section-title">
         {portfolio.contactTitle}
       </h2>
-      <p className="section-lede mb-10">{portfolio.contactLede}</p>
+      <p className="section-lede font-sans-body mb-10">{portfolio.contactLede}</p>
 
       <motion.div
         className="terminal-panel mb-12 px-6 py-8 sm:px-8 sm:py-10"

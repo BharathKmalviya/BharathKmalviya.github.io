@@ -1,6 +1,6 @@
 import {test, expect} from '@playwright/test';
 
-const SECTION_IDS = ['about', 'experience', 'education', 'tech', 'contact'];
+const SECTION_IDS = ['work', 'experience', 'about', 'tech', 'contact'];
 
 // `SectionReveal` (src/components/portfolio-page.tsx) is supposed to skip its
 // animated `motion.div` wrapper entirely under prefers-reduced-motion, per

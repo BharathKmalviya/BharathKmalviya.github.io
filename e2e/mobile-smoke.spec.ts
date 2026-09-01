@@ -1,7 +1,7 @@
 import {test, expect} from '@playwright/test';
 import {touchDevice} from './touch-device';
 
-const SECTION_IDS = ['about', 'experience', 'education', 'tech', 'contact'];
+const SECTION_IDS = ['work', 'experience', 'about', 'tech', 'contact'];
 
 test.describe('mobile viewport smoke test', () => {
   test.use({...touchDevice('iPhone 13')});

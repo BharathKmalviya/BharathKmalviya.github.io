@@ -5,11 +5,12 @@ import {motion} from 'framer-motion';
 import {useSafeReducedMotion} from '@/lib/use-safe-reduced-motion';
 import {AboutSection} from '@/components/sections/about-section';
 import {ContactSection} from '@/components/sections/contact-section';
-import {EducationSection} from '@/components/sections/education-section';
 import {ExperienceSection} from '@/components/sections/experience-section';
+import {FeaturedWorkSection} from '@/components/sections/featured-work-section';
 import {HeroTerminal} from '@/components/sections/hero-terminal';
 import {TechStackSection} from '@/components/sections/tech-stack-section';
 import {AmbientBackground} from '@/components/ui/ambient-background';
+import {SiteFooter} from '@/components/ui/site-footer';
 import {SiteNav} from '@/components/ui/site-nav';
 
 const REVEAL = {type: 'spring' as const, stiffness: 160, damping: 24, mass: 0.85};
@@ -38,20 +39,25 @@ export function PortfolioPage() {
         <SiteNav />
         <HeroTerminal />
         <SectionReveal>
+          <FeaturedWorkSection />
+        </SectionReveal>
+        <div className="band-elevated">
+          <SectionReveal>
+            <ExperienceSection />
+          </SectionReveal>
+        </div>
+        <SectionReveal>
           <AboutSection />
         </SectionReveal>
-        <SectionReveal>
-          <ExperienceSection />
-        </SectionReveal>
-        <SectionReveal>
-          <EducationSection />
-        </SectionReveal>
-        <SectionReveal delay={0.04}>
-          <TechStackSection />
-        </SectionReveal>
+        <div className="band-elevated">
+          <SectionReveal delay={0.04}>
+            <TechStackSection />
+          </SectionReveal>
+        </div>
         <SectionReveal delay={0.04}>
           <ContactSection />
         </SectionReveal>
+        <SiteFooter />
       </div>
     </main>
   );

@@ -2,6 +2,7 @@
 
 import {motion} from 'framer-motion';
 import {useSafeReducedMotion} from '@/lib/use-safe-reduced-motion';
+import {InteractiveTerminal} from '@/components/ui/interactive-terminal';
 import {Typewriter} from '@/components/ui/typewriter';
 import {portfolio} from '@/data/portfolio';
 
@@ -64,14 +65,24 @@ export function HeroTerminal() {
             <p className="text-[0.8125rem] text-[var(--terminal-neon)]">{portfolio.heroPrompt}</p>
             <Typewriter lines={portfolio.typewriterLines} />
           </div>
+          <InteractiveTerminal />
         </motion.div>
 
-        <motion.div className="flex flex-wrap items-center gap-4" {...item(0.32)}>
+        <motion.dl className="stat-strip mb-10" aria-label="Career highlights" {...item(0.28)}>
+          {portfolio.stats.map((stat) => (
+            <div key={stat.id} className="stat-cell">
+              <dd className="stat-value">{stat.value}</dd>
+              <dt className="stat-label">{stat.label}</dt>
+            </div>
+          ))}
+        </motion.dl>
+
+        <motion.div className="flex flex-wrap items-center gap-4" {...item(0.36)}>
           <button
             type="button"
             className="btn btn-primary"
-            onClick={() => document.getElementById('about')?.scrollIntoView({behavior: 'smooth'})}>
-            About me
+            onClick={() => document.getElementById('work')?.scrollIntoView({behavior: 'smooth'})}>
+            See my work
           </button>
           <button
             type="button"
@@ -79,6 +90,15 @@ export function HeroTerminal() {
             onClick={() => document.getElementById('contact')?.scrollIntoView({behavior: 'smooth'})}>
             Get in touch
           </button>
+        </motion.div>
+
+        <motion.div className="mt-14 flex justify-center" {...item(0.5)}>
+          <a href="#work" className="scroll-cue" aria-label="Scroll to featured work">
+            <span>scroll to explore</span>
+            <span className="scroll-cue__arrow" aria-hidden="true">
+              ▼
+            </span>
+          </a>
         </motion.div>
       </div>
     </section>

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 760" width="360" height="760">
+  <defs>
+    <linearGradient id="room" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1a241d"/>
+      <stop offset="1" stop-color="#10160f"/>
+    </linearGradient>
+    <linearGradient id="ai-wall" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3ddc84" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#1d5c3a" stop-opacity="0.75"/>
+    </linearGradient>
+  </defs>
+  <rect width="360" height="760" fill="#0c100d"/>
+  <!-- status bar -->
+  <rect x="24" y="40" width="34" height="10" rx="5" fill="#e8ece9" opacity="0.85"/>
+  <circle cx="296" cy="45" r="4" fill="#8f9e94"/>
+  <rect x="308" y="41" width="8" height="8" rx="2" fill="#8f9e94"/>
+  <rect x="324" y="40" width="16" height="9" rx="3" fill="#3ddc84"/>
+  <!-- title -->
+  <rect x="24" y="76" width="170" height="14" rx="7" fill="#e8ece9" opacity="0.9"/>
+  <rect x="290" y="72" width="46" height="22" rx="11" fill="#ffbd2e" opacity="0.2"/>
+  <rect x="299" y="79" width="28" height="8" rx="4" fill="#ffbd2e"/>
+  <!-- viewfinder: room with AI wall applied -->
+  <rect x="24" y="110" width="312" height="330" rx="18" fill="url(#room)" stroke="#1e2b22"/>
+  <!-- before / after split -->
+  <rect x="40" y="130" width="136" height="220" rx="8" fill="#243128"/>
+  <rect x="184" y="130" width="136" height="220" rx="8" fill="url(#ai-wall)"/>
+  <!-- sofa silhouettes -->
+  <rect x="58" y="300" width="100" height="34" rx="8" fill="#0c100d" opacity="0.6"/>
+  <rect x="202" y="300" width="100" height="34" rx="8" fill="#0c100d" opacity="0.6"/>
+  <!-- divider handle -->
+  <rect x="178" y="130" width="4" height="220" rx="2" fill="#3ddc84"/>
+  <circle cx="180" cy="240" r="14" fill="#3ddc84"/>
+  <path d="M174 240 l-4 0 M186 240 l4 0" stroke="#00391f" stroke-width="3" stroke-linecap="round"/>
+  <!-- viewfinder corners -->
+  <path d="M40 384 v20 h20" fill="none" stroke="#3ddc84" stroke-width="3" stroke-linecap="round"/>
+  <path d="M320 384 v20 h-20" fill="none" stroke="#3ddc84" stroke-width="3" stroke-linecap="round"/>
+  <!-- labels -->
+  <rect x="52" y="368" width="52" height="18" rx="9" fill="#0c100d" opacity="0.8"/>
+  <rect x="62" y="374" width="32" height="6" rx="3" fill="#8f9e94"/>
+  <rect x="252" y="368" width="52" height="18" rx="9" fill="#0c100d" opacity="0.8"/>
+  <rect x="262" y="374" width="32" height="6" rx="3" fill="#3ddc84"/>
+  <!-- generating bar -->
+  <rect x="24" y="462" width="312" height="12" rx="6" fill="#121812" stroke="#1e2b22"/>
+  <rect x="24" y="462" width="218" height="12" rx="6" fill="#3ddc84"/>
+  <rect x="24" y="486" width="140" height="8" rx="4" fill="#3ddc84" opacity="0.6"/>
+  <!-- pattern thumbnails -->
+  <rect x="24" y="516" width="70" height="70" rx="12" fill="#121812" stroke="#3ddc84"/>
+  <rect x="34" y="526" width="50" height="50" rx="8" fill="url(#ai-wall)"/>
+  <rect x="105" y="516" width="70" height="70" rx="12" fill="#121812" stroke="#1e2b22"/>
+  <rect x="115" y="526" width="50" height="50" rx="8" fill="#243128"/>
+  <rect x="186" y="516" width="70" height="70" rx="12" fill="#121812" stroke="#1e2b22"/>
+  <rect x="196" y="526" width="50" height="50" rx="8" fill="#1d5c3a" opacity="0.6"/>
+  <rect x="267" y="516" width="70" height="70" rx="12" fill="#121812" stroke="#1e2b22"/>
+  <rect x="277" y="526" width="50" height="50" rx="8" fill="#2f8a58" opacity="0.4"/>
+  <!-- CTA -->
+  <rect x="24" y="620" width="312" height="54" rx="27" fill="#3ddc84"/>
+  <circle cx="150" cy="647" r="9" fill="none" stroke="#00391f" stroke-width="3"/>
+  <path d="M150 641 v-4 M150 657 v-4" stroke="#00391f" stroke-width="3" stroke-linecap="round"/>
+  <rect x="170" y="641" width="66" height="12" rx="6" fill="#00391f"/>
+  <!-- home indicator -->
+  <rect x="130" y="726" width="100" height="5" rx="2.5" fill="#2a3a2f"/>
+</svg>

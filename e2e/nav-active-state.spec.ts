@@ -1,6 +1,6 @@
 import {test, expect} from '@playwright/test';
 
-const SECTION_IDS = ['about', 'experience', 'education', 'tech', 'contact'];
+const SECTION_IDS = ['work', 'experience', 'about', 'tech', 'contact'];
 
 test.describe('primary nav active-section indicator', () => {
   test('never marks more than one nav link active at once while scrolling', async ({page}) => {
@@ -24,8 +24,8 @@ test.describe('primary nav active-section indicator', () => {
     // threshold is unreliable across sections of very different heights —
     // on real content, tall sections (Experience, Skills) could never cross
     // the threshold at all, leaving the nav permanently stuck on the last
-    // short section (Education) that could, regardless of how far the user
-    // had actually scrolled past it.
+    // short section that could, regardless of how far the user had actually
+    // scrolled past it.
     await page.goto('/');
 
     for (const id of SECTION_IDS) {

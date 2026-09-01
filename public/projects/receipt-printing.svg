@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 760" width="360" height="760">
+  <rect width="360" height="760" fill="#0c100d"/>
+  <!-- status bar -->
+  <rect x="24" y="40" width="34" height="10" rx="5" fill="#e8ece9" opacity="0.85"/>
+  <circle cx="296" cy="45" r="4" fill="#8f9e94"/>
+  <rect x="308" y="41" width="8" height="8" rx="2" fill="#8f9e94"/>
+  <rect x="324" y="40" width="16" height="9" rx="3" fill="#3ddc84"/>
+  <!-- header: table + order no -->
+  <rect x="24" y="76" width="120" height="14" rx="7" fill="#e8ece9" opacity="0.9"/>
+  <rect x="24" y="100" width="80" height="9" rx="4.5" fill="#8f9e94" opacity="0.6"/>
+  <rect x="264" y="74" width="72" height="26" rx="13" fill="#3ddc84" opacity="0.16"/>
+  <rect x="276" y="83" width="48" height="8" rx="4" fill="#3ddc84"/>
+  <!-- order items -->
+  <rect x="24" y="130" width="312" height="54" rx="12" fill="#121812" stroke="#1e2b22"/>
+  <rect x="40" y="146" width="120" height="10" rx="5" fill="#e8ece9" opacity="0.8"/>
+  <rect x="40" y="164" width="60" height="7" rx="3.5" fill="#2a3a2f"/>
+  <rect x="282" y="150" width="40" height="10" rx="5" fill="#3ddc84" opacity="0.8"/>
+  <rect x="24" y="192" width="312" height="54" rx="12" fill="#121812" stroke="#1e2b22"/>
+  <rect x="40" y="208" width="100" height="10" rx="5" fill="#e8ece9" opacity="0.8"/>
+  <rect x="40" y="226" width="70" height="7" rx="3.5" fill="#2a3a2f"/>
+  <rect x="282" y="212" width="40" height="10" rx="5" fill="#3ddc84" opacity="0.8"/>
+  <rect x="24" y="254" width="312" height="54" rx="12" fill="#121812" stroke="#1e2b22"/>
+  <rect x="40" y="270" width="140" height="10" rx="5" fill="#e8ece9" opacity="0.8"/>
+  <rect x="40" y="288" width="50" height="7" rx="3.5" fill="#2a3a2f"/>
+  <rect x="282" y="274" width="40" height="10" rx="5" fill="#3ddc84" opacity="0.8"/>
+  <!-- total row -->
+  <rect x="24" y="322" width="312" height="46" rx="12" fill="#3ddc84" opacity="0.12"/>
+  <rect x="40" y="338" width="70" height="12" rx="6" fill="#3ddc84"/>
+  <rect x="262" y="336" width="60" height="14" rx="7" fill="#3ddc84"/>
+  <!-- printer slot -->
+  <rect x="60" y="396" width="240" height="14" rx="7" fill="#121812" stroke="#3ddc84" stroke-opacity="0.5"/>
+  <!-- receipt sliding out -->
+  <rect x="84" y="403" width="192" height="270" rx="4" fill="#e8ece9" opacity="0.95"/>
+  <path d="M84 673 l16 -10 16 10 16 -10 16 10 16 -10 16 10 16 -10 16 10 16 -10 16 10 16 -10 16 10 v-8 h-192 z" fill="#0c100d"/>
+  <rect x="108" y="424" width="144" height="11" rx="4" fill="#0c100d" opacity="0.8"/>
+  <rect x="128" y="444" width="104" height="7" rx="3.5" fill="#0c100d" opacity="0.4"/>
+  <rect x="108" y="468" width="144" height="2" fill="#0c100d" opacity="0.25"/>
+  <rect x="108" y="484" width="90" height="8" rx="4" fill="#0c100d" opacity="0.55"/>
+  <rect x="226" y="484" width="26" height="8" rx="4" fill="#0c100d" opacity="0.55"/>
+  <rect x="108" y="506" width="76" height="8" rx="4" fill="#0c100d" opacity="0.55"/>
+  <rect x="226" y="506" width="26" height="8" rx="4" fill="#0c100d" opacity="0.55"/>
+  <rect x="108" y="528" width="100" height="8" rx="4" fill="#0c100d" opacity="0.55"/>
+  <rect x="226" y="528" width="26" height="8" rx="4" fill="#0c100d" opacity="0.55"/>
+  <rect x="108" y="552" width="144" height="2" fill="#0c100d" opacity="0.25"/>
+  <rect x="108" y="568" width="60" height="10" rx="4" fill="#0c100d" opacity="0.85"/>
+  <rect x="212" y="568" width="40" height="10" rx="4" fill="#0c100d" opacity="0.85"/>
+  <!-- barcode -->
+  <g fill="#0c100d" opacity="0.75">
+    <rect x="116" y="596" width="4" height="34"/><rect x="124" y="596" width="2" height="34"/>
+    <rect x="130" y="596" width="6" height="34"/><rect x="140" y="596" width="3" height="34"/>
+    <rect x="147" y="596" width="5" height="34"/><rect x="156" y="596" width="2" height="34"/>
+    <rect x="162" y="596" width="4" height="34"/><rect x="170" y="596" width="6" height="34"/>
+    <rect x="180" y="596" width="2" height="34"/><rect x="186" y="596" width="5" height="34"/>
+    <rect x="195" y="596" width="3" height="34"/><rect x="202" y="596" width="6" height="34"/>
+    <rect x="212" y="596" width="2" height="34"/><rect x="218" y="596" width="4" height="34"/>
+    <rect x="226" y="596" width="6" height="34"/><rect x="236" y="596" width="3" height="34"/>
+  </g>
+  <!-- print button -->
+  <rect x="24" y="692" width="312" height="52" rx="26" fill="#3ddc84"/>
+  <rect x="128" y="711" width="104" height="13" rx="6" fill="#00391f"/>
+</svg>

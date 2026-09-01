@@ -8,16 +8,16 @@ type CopyEmailButtonProps = {
 };
 
 export function CopyEmailButton({email}: CopyEmailButtonProps) {
-  const [label, setLabel] = useState('Copy email');
+  const [copied, setCopied] = useState(false);
   const [liveMessage, setLiveMessage] = useState('');
 
   async function handleClick() {
     const result = await copyText(email);
     if (result === 'copied') {
-      setLabel('Copied');
+      setCopied(true);
       setLiveMessage('Email copied to clipboard');
       window.setTimeout(() => {
-        setLabel('Copy email');
+        setCopied(false);
         setLiveMessage('');
       }, 2000);
       return;
@@ -38,7 +38,16 @@ export function CopyEmailButton({email}: CopyEmailButtonProps) {
   return (
     <div className="inline-flex flex-col items-start gap-2">
       <button type="button" className="btn btn-ghost" onClick={handleClick}>
-        {label}
+        {copied ? (
+          <span className="inline-flex items-center gap-2">
+            <span className="check-pop text-[var(--terminal-neon)]" aria-hidden="true">
+              ✓
+            </span>
+            Copied
+          </span>
+        ) : (
+          'Copy email'
+        )}
       </button>
       <span className="sr-only" aria-live="polite">
         {liveMessage}
