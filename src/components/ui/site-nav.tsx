@@ -1,20 +1,31 @@
 'use client';
 
 import {useEffect, useState} from 'react';
+import {motion, useScroll, useSpring} from 'framer-motion';
 import {updateActiveSection} from '@/lib/section-scroll-spy';
+import {useSafeReducedMotion} from '@/lib/use-safe-reduced-motion';
 import {portfolio} from '@/data/portfolio';
 
 const BRAND_SLUG = portfolio.name.toLowerCase().replace(/\s+/g, '-');
 
-const SECTIONS = ['about', 'experience', 'education', 'tech', 'contact'] as const;
+const SECTIONS = ['work', 'experience', 'about', 'tech', 'contact'] as const;
 
 const NAV = [
-  {href: '#about', id: 'about', label: 'About'},
+  {href: '#work', id: 'work', label: 'Work'},
   {href: '#experience', id: 'experience', label: 'Experience'},
-  {href: '#education', id: 'education', label: 'Education'},
+  {href: '#about', id: 'about', label: 'About'},
   {href: '#tech', id: 'tech', label: 'Skills'},
   {href: '#contact', id: 'contact', label: 'Contact'},
 ] as const;
+
+function ScrollProgress() {
+  const reduceMotion = useSafeReducedMotion();
+  const {scrollYProgress} = useScroll();
+  const scaleX = useSpring(scrollYProgress, {stiffness: 140, damping: 28, restDelta: 0.001});
+
+  if (reduceMotion) return null;
+  return <motion.div className="scroll-progress" style={{scaleX}} aria-hidden="true" />;
+}
 
 export function SiteNav() {
   const [active, setActive] = useState<string | null>(null);
@@ -50,7 +61,8 @@ export function SiteNav() {
     <nav
       className="sticky top-0 z-30 border-b border-[var(--terminal-border)] bg-[color-mix(in_srgb,var(--terminal-bg)_72%,transparent)] backdrop-blur-xl"
       aria-label="Primary">
-      <div className="mx-auto flex w-full max-w-[56rem] items-center justify-between gap-4 px-[var(--page-pad-x)] py-4">
+      <ScrollProgress />
+      <div className="mx-auto flex w-full max-w-[var(--content-wide)] items-center justify-between gap-4 px-[var(--page-pad-x)] py-4">
         <a
           href="#top"
           className="shrink-0 text-[0.8125rem] tracking-wide text-[var(--terminal-neon)] transition-opacity hover:opacity-80"

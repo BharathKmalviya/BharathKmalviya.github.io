@@ -1,7 +1,7 @@
 import type {Metadata, Viewport} from 'next';
 import type {ReactNode} from 'react';
 import './globals.css';
-import {jetbrainsMono} from './fonts';
+import {inter, jetbrainsMono} from './fonts';
 import {portfolio} from '@/data/portfolio';
 
 export const viewport: Viewport = {
@@ -97,7 +97,7 @@ const jsonLd = {
 
 export default function RootLayout({children}: {children: ReactNode}) {
   return (
-    <html lang="en" className={`dark ${jetbrainsMono.variable}`}>
+    <html lang="en" className={`dark ${jetbrainsMono.variable} ${inter.variable}`}>
       <body>
         <script
           type="application/ld+json"
