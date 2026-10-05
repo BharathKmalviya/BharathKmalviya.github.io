@@ -3,6 +3,7 @@ import type {ReactNode} from 'react';
 import './globals.css';
 import {inter, jetbrainsMono} from './fonts';
 import {portfolio} from '@/data/portfolio';
+import {FirebaseAnalytics} from '@/components/firebase-analytics';
 
 export const viewport: Viewport = {
   themeColor: '#070807',
@@ -104,6 +105,7 @@ export default function RootLayout({children}: {children: ReactNode}) {
           dangerouslySetInnerHTML={{__html: JSON.stringify(jsonLd)}}
         />
         {children}
+        <FirebaseAnalytics />
       </body>
     </html>
   );

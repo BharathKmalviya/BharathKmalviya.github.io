@@ -4,13 +4,14 @@ Guidance for agents working in this repository.
 
 ## Status
 
-**Production site** for [bharathmalviya.com](https://bharathmalviya.com). Active code lives on `feature/react-portfolio` until merged to `master` (Pages deploy). Previous Kobweb site is frozen on `archive/kobweb-kotlin` — do not modify that branch.
+**Production site** for [bharathmalviya.com](https://bharathmalviya.com). Production code lives on `master`; feature branches merge through PR checks before Pages deployment. Previous Kobweb site is frozen on `archive/kobweb-kotlin` — do not modify that branch.
 
 ## Tech Stack & Design
 
 - **Stack**: Next.js 16 (App Router, `output: 'export'`), TypeScript, Tailwind CSS v4, Framer Motion. Contact is copy-email + `mailto:`. GitHub Pages + custom domain.
 - **Visual design**: Dark terminal aesthetic — near-black surfaces, neon Android green `#3DDC84`, JetBrains Mono, native HTML buttons. No Material Web.
 - **Content**: `src/data/portfolio.ts` is the single source for copy, experience, education, skills, and SEO keywords.
+- **Analytics**: Firebase project `bharathmalviya-portfolio`; browser-only, best effort, production-domain collection. Keep event parameters fixed and free of personal data. See `docs/analytics.md` for setup and manual verification. GitHub Pages remains the host.
 - **Source of truth**: `.specify/memory/constitution.md` (v3.1.0). Update it when lasting decisions change.
 
 ## Testing

@@ -10,6 +10,7 @@ Production personal site for **Bharath Malviya**, Senior Android Developer at Ma
 - TypeScript, Tailwind CSS v4, Framer Motion
 - Dark terminal UI (JetBrains Mono, neon `#3DDC84`)
 - Hosted on GitHub Pages from `master`
+- Firebase Analytics for production page views and contact actions
 
 ## Develop
 
@@ -37,8 +38,9 @@ Edit `src/data/portfolio.ts` for profile copy, experience, education, skills, an
 
 ## Docs
 
-- Constitution: `.specify/memory/constitution.md` (v3.0.0)
+- Constitution: `.specify/memory/constitution.md` (v3.1.0)
 - Agent notes: `CLAUDE.md`
+- Analytics setup and manual verification: [docs/analytics.md](docs/analytics.md)
 - Historical design notes: `docs/superpowers/specs/` (includes superseded Material 3 exploration)
 
 ## Author

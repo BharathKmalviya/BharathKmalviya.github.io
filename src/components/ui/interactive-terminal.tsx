@@ -4,6 +4,7 @@ import {useCallback, useEffect, useRef, useState} from 'react';
 import {useSafeReducedMotion} from '@/lib/use-safe-reduced-motion';
 import {MatrixRain} from '@/components/ui/matrix-rain';
 import {portfolio} from '@/data/portfolio';
+import {trackContactClick} from '@/lib/firebase-analytics';
 
 type Tone = 'cmd' | 'out' | 'accent' | 'warn' | 'err';
 type Line = {id: number; tone: Tone; text: string};
@@ -199,6 +200,7 @@ export function InteractiveTerminal() {
             ['warn', 'opening mail client ...'],
           );
           window.setTimeout(() => {
+            void trackContactClick('email', 'terminal');
             window.location.href = `mailto:${portfolio.email}?subject=Let's work together`;
           }, 900);
           break;
