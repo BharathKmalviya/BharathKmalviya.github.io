@@ -2,6 +2,7 @@
 
 import {useState} from 'react';
 import {copyText} from '@/lib/clipboard';
+import {trackEmailCopied} from '@/lib/firebase-analytics';
 
 type CopyEmailButtonProps = {
   email: string;
@@ -14,6 +15,7 @@ export function CopyEmailButton({email}: CopyEmailButtonProps) {
   async function handleClick() {
     const result = await copyText(email);
     if (result === 'copied') {
+      void trackEmailCopied();
       setCopied(true);
       setLiveMessage('Email copied to clipboard');
       window.setTimeout(() => {

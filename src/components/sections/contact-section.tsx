@@ -5,6 +5,14 @@ import {useSafeReducedMotion} from '@/lib/use-safe-reduced-motion';
 import {CopyEmailButton} from '@/components/ui/copy-email-button';
 import {EmailIcon, GitHubIcon, LinkedInIcon, TwitterXIcon} from '@/components/icons/social-icons';
 import {portfolio} from '@/data/portfolio';
+import {trackContactClick, type ContactChannel} from '@/lib/firebase-analytics';
+
+const CHANNEL_BY_LABEL: Record<string, ContactChannel> = {
+  LinkedIn: 'linkedin',
+  GitHub: 'github',
+  'Twitter/X': 'x',
+  Email: 'email',
+};
 
 const ICON_BY_LABEL = {
   LinkedIn: LinkedInIcon,
@@ -40,6 +48,7 @@ export function ContactSection() {
           <a
             id="contact-email"
             href={`mailto:${portfolio.email}`}
+            onClick={() => void trackContactClick('email', 'contact')}
             tabIndex={0}
             className="text-[clamp(1rem,2.5vw,1.25rem)] break-all text-[var(--terminal-neon)] outline-none transition-opacity hover:opacity-85 focus-visible:ring-2 focus-visible:ring-[var(--terminal-neon)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--terminal-surface)]">
             {portfolio.email}
@@ -66,6 +75,10 @@ export function ContactSection() {
                 whileHover={reduceMotion ? undefined : {y: -3}}>
                 <a
                   href={href}
+                  onClick={() => {
+                    const channel = CHANNEL_BY_LABEL[label];
+                    if (channel) void trackContactClick(channel, 'contact');
+                  }}
                   target={href.startsWith('mailto:') ? undefined : '_blank'}
                   rel={href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
                   aria-label={label}
