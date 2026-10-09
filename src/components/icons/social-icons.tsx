@@ -1,5 +1,25 @@
 type IconProps = {className?: string};
 
+export function ExternalLinkIcon({className}: IconProps) {
+  return (
+    <svg
+      aria-hidden="true"
+      focusable="false"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      width="14"
+      height="14"
+      className={className}>
+      <path d="M14 3h7v7M21 3l-9 9" />
+      <path d="M10 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5" />
+    </svg>
+  );
+}
+
 export function LinkedInIcon({className}: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22" className={className}>

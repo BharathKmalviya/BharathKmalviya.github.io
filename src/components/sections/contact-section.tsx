@@ -1,7 +1,7 @@
 'use client';
 
 import {CopyEmailButton} from '@/components/ui/copy-email-button';
-import {EmailIcon, GitHubIcon, LinkedInIcon, TwitterXIcon} from '@/components/icons/social-icons';
+import {EmailIcon, ExternalLinkIcon, GitHubIcon, LinkedInIcon, TwitterXIcon} from '@/components/icons/social-icons';
 import {portfolio} from '@/data/portfolio';
 import {trackContactClick, type ContactChannel} from '@/lib/firebase-analytics';
 
@@ -40,6 +40,7 @@ export function ContactSection() {
           {portfolio.socials.map(({href, label}) => {
             const Icon = ICON_BY_LABEL[label as keyof typeof ICON_BY_LABEL];
             if (!Icon) return null;
+            const opensNewTab = !href.startsWith('mailto:');
             return (
               <li key={label}>
                 <a
@@ -48,13 +49,13 @@ export function ContactSection() {
                     const channel = CHANNEL_BY_LABEL[label];
                     if (channel) void trackContactClick(channel, 'contact');
                   }}
-                  target={href.startsWith('mailto:') ? undefined : '_blank'}
-                  rel={href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
-                  aria-label={label}
+                  target={opensNewTab ? '_blank' : undefined}
+                  rel={opensNewTab ? 'noopener noreferrer' : undefined}
+                  aria-label={opensNewTab ? `${label} (opens in a new tab)` : label}
                   className="social-link font-sans-body">
                   <Icon />
                   <span>{label}</span>
-                  <span aria-hidden="true">↗</span>
+                  {opensNewTab ? <ExternalLinkIcon /> : null}
                 </a>
               </li>
             );
