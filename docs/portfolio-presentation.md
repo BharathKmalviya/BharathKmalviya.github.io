@@ -54,6 +54,10 @@ narrow-browser screenshots were reviewed. Unit/E2E suites were not run locally;
 CI remains the automated regression gate. The owner's manual checks below and
 production Analytics ingestion remain unverified.
 
+The first PR run passed, with a retry of the existing pointer-hover check. Its
+highlight assertion now polls for the visible background change rather than
+sampling during the CSS transition; the touch-device no-hover check is retained.
+
 Manual review for the owner:
 
 1. At desktop width, read the hero and all four projects. Confirm the role,
