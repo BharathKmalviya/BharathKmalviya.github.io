@@ -25,6 +25,9 @@ unchanged.
   keyboard focus, copy-email fallback, and reduced-motion scrolling.
 - Most sections are static React components. Client code is limited to navigation,
   hero scroll buttons, contact actions, clipboard feedback, and Analytics.
+- Contact links that open a new tab use a small, decorative SVG external-link
+  icon and announce the new-tab behavior in their accessible label. Email keeps
+  its mail icon without an external-link indicator. Avoid text glyphs as icons.
 
 ## Content rules
 
@@ -39,6 +42,16 @@ publication rights are known. The old placeholder SVGs are not rendered.
 
 Do not change frameworks to satisfy a novelty score. Next.js supplies the static
 export and SEO metadata; it does not require the old visual style.
+
+The fresh public slop-checker review on 2026-10-09 scored the revised site at
+31%, down from the old presentation's 63%. Its remaining findings were four
+text arrows classified as emoji and Next.js assets. The contact-icon follow-up
+addresses the former with consistent SVGs and clearer new-tab semantics.
+Use a new review query parameter when checking after publication: the checker's
+Jina source returned old copy for the bare domain even when the live page was
+current. Verify the quoted evidence before acting on a score. The score after
+the icon follow-up must be checked on the deployed page; no lower score is
+assumed from source changes.
 
 ## Review and release
 
