@@ -39,7 +39,11 @@ test.describe('nav link hover styling on pointer devices', () => {
     const about = page.getByRole('link', {name: 'About', exact: true});
     await about.hover();
 
-    const background = await about.evaluate((el) => getComputedStyle(el).backgroundColor);
-    expect(background).not.toBe('rgba(0, 0, 0, 0)');
+    // The highlight transitions from transparent over 160ms. Wait for its
+    // observable result instead of sampling the first paint after hover.
+    await expect.poll(
+      () => about.evaluate((el) => getComputedStyle(el).backgroundColor),
+      {timeout: 2000},
+    ).not.toBe('rgba(0, 0, 0, 0)');
   });
 });

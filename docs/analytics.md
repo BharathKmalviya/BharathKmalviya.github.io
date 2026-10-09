@@ -41,11 +41,11 @@ SDK failures and ad blockers must not interrupt rendering, copying, or navigatio
 | Event | Trigger | Custom parameters |
 | --- | --- | --- |
 | `page_view` | Initial document load | Sanitized `page_location`, `page_title` |
-| `contact_click` | Email/social link in Contact or terminal hire command | Fixed `channel` (`email`, `linkedin`, `github`, `x`), `source` (`contact`, `terminal`) |
+| `contact_click` | Email/social link in Contact | Fixed `channel` (`email`, `linkedin`, `github`, `x`), `source=contact` |
 | `email_copied` | Email copied successfully | None |
 
 Anchor navigation does not generate additional manual page views. Custom events
-contain no email addresses, clipboard contents, arbitrary terminal input, or user
+contain no email addresses, clipboard contents, arbitrary text input, or user
 IDs. Page location and referrer exclude query strings and fragments. Google Signals
 and advertising personalization signals are disabled in SDK configuration. Standard
 Analytics browser/session measurements still apply; this is not a cookieless setup.
@@ -68,20 +68,21 @@ GitHub Pages.
 3. Copy the contact email and confirm both the normal Copied state and
    `email_copied`. Click the email and social links and confirm their existing
    navigation and `contact_click` with the expected fixed channel/source.
-4. Run `sudo hire-me` in the terminal and confirm the existing mail action and
-   `contact_click` with `source=terminal`. Ordinary typed terminal input must not
-   appear in events.
-5. Inspect Analytics collect requests: confirm `tid=G-B3BJN5MSTS`, no query/hash
+4. Inspect Analytics collect requests: confirm `tid=G-B3BJN5MSTS`, no query/hash
    in page location/referrer, and no email or typed input in custom parameters.
-6. Block Analytics requests and confirm the site, copy action, and navigation
+5. Block Analytics requests and confirm the site, copy action, and navigation
    continue working. Check that local development and privacy opt-out browsers
    do not initialize Analytics.
-7. Remove debug mode with
+6. Remove debug mode with
    `sessionStorage.removeItem('portfolio-analytics-debug')`, then reload. Check
    Realtime for ordinary visits; aggregated reporting can arrive later.
 
 To break down `contact_click` by channel/source in ordinary reports, register
 event-scoped custom dimensions for `channel` and `source` in GA4 Admin → Custom
 definitions. DebugView shows these parameters without that reporting setup.
+
+The simulated terminal was removed in the 2026-10-09 presentation change.
+Historical events can still have `source=terminal`; new contact interactions use
+`source=contact`. The Analytics configuration and privacy gates are unchanged.
 
 Setup follows the official [Firebase Analytics web guide](https://firebase.google.com/docs/analytics/web/get-started).

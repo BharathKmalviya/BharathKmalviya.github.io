@@ -1,64 +1,25 @@
-'use client';
-
-import type {ReactNode} from 'react';
-import {motion} from 'framer-motion';
-import {useSafeReducedMotion} from '@/lib/use-safe-reduced-motion';
 import {AboutSection} from '@/components/sections/about-section';
 import {ContactSection} from '@/components/sections/contact-section';
 import {ExperienceSection} from '@/components/sections/experience-section';
 import {FeaturedWorkSection} from '@/components/sections/featured-work-section';
-import {HeroTerminal} from '@/components/sections/hero-terminal';
+import {HeroSection} from '@/components/sections/hero-section';
 import {TechStackSection} from '@/components/sections/tech-stack-section';
-import {AmbientBackground} from '@/components/ui/ambient-background';
 import {SiteFooter} from '@/components/ui/site-footer';
 import {SiteNav} from '@/components/ui/site-nav';
 
-const REVEAL = {type: 'spring' as const, stiffness: 160, damping: 24, mass: 0.85};
-
-function SectionReveal({children, delay = 0}: {children: ReactNode; delay?: number}) {
-  const reduceMotion = useSafeReducedMotion();
-  if (reduceMotion) {
-    return <>{children}</>;
-  }
-  return (
-    <motion.div
-      initial={{opacity: 0, y: 36, filter: 'blur(6px)'}}
-      whileInView={{opacity: 1, y: 0, filter: 'blur(0px)'}}
-      viewport={{once: true, margin: '-10% 0px -10% 0px', amount: 0.2}}
-      transition={{...REVEAL, delay}}>
-      {children}
-    </motion.div>
-  );
-}
-
 export function PortfolioPage() {
   return (
-    <main className="page-shell min-h-dvh text-[var(--text)]">
-      <AmbientBackground />
-      <div className="page-content">
-        <SiteNav />
-        <HeroTerminal />
-        <SectionReveal>
-          <FeaturedWorkSection />
-        </SectionReveal>
-        <div className="band-elevated">
-          <SectionReveal>
-            <ExperienceSection />
-          </SectionReveal>
-        </div>
-        <SectionReveal>
-          <AboutSection />
-        </SectionReveal>
-        <div className="band-elevated">
-          <SectionReveal delay={0.04}>
-            <TechStackSection />
-          </SectionReveal>
-        </div>
-        <SectionReveal delay={0.04}>
-          <ContactSection />
-        </SectionReveal>
-        <SiteFooter />
-      </div>
-    </main>
+    <div className="page-shell text-[var(--text)]">
+      <SiteNav />
+      <main>
+        <HeroSection />
+        <FeaturedWorkSection />
+        <ExperienceSection />
+        <AboutSection />
+        <TechStackSection />
+        <ContactSection />
+      </main>
+      <SiteFooter />
+    </div>
   );
 }

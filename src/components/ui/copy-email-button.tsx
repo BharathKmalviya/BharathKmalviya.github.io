@@ -42,7 +42,7 @@ export function CopyEmailButton({email}: CopyEmailButtonProps) {
       <button type="button" className="btn btn-ghost" onClick={handleClick}>
         {copied ? (
           <span className="inline-flex items-center gap-2">
-            <span className="check-pop text-[var(--terminal-neon)]" aria-hidden="true">
+            <span className="text-[var(--terminal-neon)]" aria-hidden="true">
               ✓
             </span>
             Copied

@@ -30,22 +30,19 @@ test.describe('section content matches src/data/portfolio.ts', () => {
     }
   });
 
-  test('Education renders every school in the About status panel', async ({page}) => {
-    // Education is no longer its own section — for a senior developer it reads
-    // as a footnote, so it lives as one line per school in the About panel.
+  test('Education renders every school in the About section', async ({page}) => {
     await page.goto('/');
     const about = page.locator('#about');
     await about.scrollIntoViewIfNeeded();
 
     for (const item of portfolio.education) {
       await expect(about).toContainText(item.school);
-      // The panel shows the abbreviation ("MCA"), not the full degree name.
       const abbreviation = item.degree.match(/\(([^)]+)\)/)?.[1] ?? item.degree;
       await expect(about).toContainText(abbreviation);
     }
   });
 
-  test('Skills renders every capability group and chip', async ({page}) => {
+  test('Practice renders every capability group and its tools', async ({page}) => {
     await page.goto('/');
     const tech = page.locator('#tech');
     await tech.scrollIntoViewIfNeeded();
@@ -58,7 +55,7 @@ test.describe('section content matches src/data/portfolio.ts', () => {
     }
   });
 
-  test('Featured Work renders every project', async ({page}) => {
+  test('Selected work renders every project', async ({page}) => {
     await page.goto('/');
     const work = page.locator('#work');
     await work.scrollIntoViewIfNeeded();

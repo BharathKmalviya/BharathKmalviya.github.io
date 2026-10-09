@@ -10,13 +10,13 @@ test.describe('hero section', () => {
     await expect(hero).toContainText(portfolio.company);
   });
 
-  test('"See my work" button scrolls to the Featured Work section', async ({page}) => {
+  test('"See my work" button scrolls to the selected work section', async ({page}) => {
     await page.goto('/');
     await page.getByRole('button', {name: 'See my work'}).click();
     await expect(page.locator('#work')).toBeInViewport();
   });
 
-  test('shows the career stat strip', async ({page}) => {
+  test('shows the career highlights', async ({page}) => {
     await page.goto('/');
     const hero = page.locator('#top');
     for (const stat of portfolio.stats) {
