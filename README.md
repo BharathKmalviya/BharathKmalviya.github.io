@@ -7,8 +7,9 @@ Production personal site for **Bharath Malviya**, Senior Android Developer at Ma
 ## Stack
 
 - Next.js 16 (App Router, static export)
-- TypeScript, Tailwind CSS v4, Framer Motion
-- Dark terminal UI (JetBrains Mono, neon `#3DDC84`)
+- TypeScript, Tailwind CSS v4
+- Dark Android palette with JetBrains Mono headings, Inter body copy, and `#3DDC84` accents
+- Plain project writeups; no simulated shell, placeholder app screens, or glass effects
 - Hosted on GitHub Pages from `master`
 - Firebase Analytics for production page views and contact actions
 
@@ -41,7 +42,8 @@ Edit `src/data/portfolio.ts` for profile copy, experience, education, skills, an
 - Constitution: `.specify/memory/constitution.md` (v3.1.0)
 - Agent notes: `CLAUDE.md`
 - Analytics setup and manual verification: [docs/analytics.md](docs/analytics.md)
-- Historical design notes: `docs/superpowers/specs/` (includes superseded Material 3 exploration)
+- Current presentation and content rules: [docs/portfolio-presentation.md](docs/portfolio-presentation.md)
+- Historical design notes: `docs/superpowers/specs/` (Material 3 and simulated-terminal explorations)
 
 ## Author
 

@@ -8,11 +8,11 @@ Guidance for agents working in this repository.
 
 ## Tech Stack & Design
 
-- **Stack**: Next.js 16 (App Router, `output: 'export'`), TypeScript, Tailwind CSS v4, Framer Motion. Contact is copy-email + `mailto:`. GitHub Pages + custom domain.
-- **Visual design**: Dark terminal aesthetic — near-black surfaces, neon Android green `#3DDC84`, JetBrains Mono, native HTML buttons. No Material Web.
+- **Stack**: Next.js 16 (App Router, `output: 'export'`), TypeScript, Tailwind CSS v4. Contact is copy-email + `mailto:`. GitHub Pages + custom domain.
+- **Visual design**: Retain the constitution's dark palette, Android green `#3DDC84`, JetBrains Mono, and native controls. The current presentation uses plain project writeups, solid surfaces, and Inter body copy. Simulated shell commands, window chrome, typewriters, ambient effects, and placeholder screens were removed at the owner's request. See `docs/portfolio-presentation.md`; historical terminal design documents are archived context.
 - **Content**: `src/data/portfolio.ts` is the single source for copy, experience, education, skills, and SEO keywords.
 - **Analytics**: Firebase project `bharathmalviya-portfolio`; browser-only, best effort, production-domain collection. Keep event parameters fixed and free of personal data. See `docs/analytics.md` for setup and manual verification. GitHub Pages remains the host.
-- **Source of truth**: `.specify/memory/constitution.md` (v3.1.0). Update it when lasting decisions change.
+- **Source of truth**: `.specify/memory/constitution.md` (v3.1.0). Constitution amendments require explicit approval. Current presentation refinements preserve its static hosting, dark palette, typography, accessibility, and CI requirements.
 
 ## Testing
 

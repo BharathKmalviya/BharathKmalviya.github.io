@@ -6,7 +6,7 @@ import {portfolio} from '@/data/portfolio';
 import {FirebaseAnalytics} from '@/components/firebase-analytics';
 
 export const viewport: Viewport = {
-  themeColor: '#070807',
+  themeColor: '#070a08',
   colorScheme: 'dark',
 };
 

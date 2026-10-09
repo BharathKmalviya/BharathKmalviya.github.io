@@ -12,7 +12,7 @@ const firebaseConfig = {
 
 type AnalyticsClient = {analytics: Analytics; logEvent: typeof FirebaseLogEvent};
 export type ContactChannel = 'email' | 'linkedin' | 'github' | 'x';
-export type ContactSource = 'contact' | 'terminal';
+export type ContactSource = 'contact';
 
 let clientPromise: Promise<AnalyticsClient | null> | undefined;
 

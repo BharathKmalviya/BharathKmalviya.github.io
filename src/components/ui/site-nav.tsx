@@ -1,12 +1,8 @@
 'use client';
 
 import {useEffect, useState} from 'react';
-import {motion, useScroll, useSpring} from 'framer-motion';
 import {updateActiveSection} from '@/lib/section-scroll-spy';
-import {useSafeReducedMotion} from '@/lib/use-safe-reduced-motion';
 import {portfolio} from '@/data/portfolio';
-
-const BRAND_SLUG = portfolio.name.toLowerCase().replace(/\s+/g, '-');
 
 const SECTIONS = ['work', 'experience', 'about', 'tech', 'contact'] as const;
 
@@ -17,15 +13,6 @@ const NAV = [
   {href: '#tech', id: 'tech', label: 'Skills'},
   {href: '#contact', id: 'contact', label: 'Contact'},
 ] as const;
-
-function ScrollProgress() {
-  const reduceMotion = useSafeReducedMotion();
-  const {scrollYProgress} = useScroll();
-  const scaleX = useSpring(scrollYProgress, {stiffness: 140, damping: 28, restDelta: 0.001});
-
-  if (reduceMotion) return null;
-  return <motion.div className="scroll-progress" style={{scaleX}} aria-hidden="true" />;
-}
 
 export function SiteNav() {
   const [active, setActive] = useState<string | null>(null);
@@ -59,18 +46,17 @@ export function SiteNav() {
 
   return (
     <nav
-      className="sticky top-0 z-30 border-b border-[var(--terminal-border)] bg-[color-mix(in_srgb,var(--terminal-bg)_72%,transparent)] backdrop-blur-xl"
+      className="site-nav sticky top-0 z-30"
       aria-label="Primary">
-      <ScrollProgress />
-      <div className="mx-auto flex w-full max-w-[var(--content-wide)] items-center justify-between gap-4 px-[var(--page-pad-x)] py-4">
+      <div className="nav-inner">
         <a
           href="#top"
-          className="shrink-0 text-[0.8125rem] tracking-wide text-[var(--terminal-neon)] transition-opacity hover:opacity-80"
+          className="nav-brand"
           onClick={() => setActive(null)}>
-          <span className="text-[var(--text-muted)]">~/</span>
-          {BRAND_SLUG}
+          <span className="brand-mark" aria-hidden="true">bm</span>
+          {portfolio.name}
         </a>
-        <ul className="no-scrollbar flex items-center gap-0.5 overflow-x-auto sm:gap-1">
+        <ul className="no-scrollbar flex min-w-0 items-center gap-0.5 overflow-x-auto sm:gap-1">
           {NAV.map((item) => (
             <li key={item.href}>
               <a
