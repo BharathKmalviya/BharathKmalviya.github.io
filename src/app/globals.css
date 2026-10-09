@@ -257,6 +257,7 @@ body { min-height: 100dvh; }
 .contact-email { font-size: clamp(1rem, 2.5vw, 1.625rem); line-height: 1.6; overflow-wrap: anywhere; text-decoration: underline; text-underline-offset: 0.3em; text-decoration-thickness: 1px; }
 .social-link { display: inline-flex; align-items: center; gap: 0.6rem; min-height: 2.75rem; font-size: 0.8125rem; color: var(--text-muted); }
 .site-footer { border-top: 1px solid var(--terminal-border); }
+.site-footer .section-frame { padding-block: 1.5rem; }
 .footer-link { padding-block: 0.5rem; }
 
 @media (min-width: 40rem) {

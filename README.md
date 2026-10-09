@@ -39,7 +39,7 @@ Edit `src/data/portfolio.ts` for profile copy, experience, education, skills, an
 
 ## Docs
 
-- Constitution: `.specify/memory/constitution.md` (v3.1.0)
+- Constitution: `.specify/memory/constitution.md` (v4.0.0)
 - Agent notes: `CLAUDE.md`
 - Analytics setup and manual verification: [docs/analytics.md](docs/analytics.md)
 - Current presentation and content rules: [docs/portfolio-presentation.md](docs/portfolio-presentation.md)

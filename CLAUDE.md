@@ -12,7 +12,7 @@ Guidance for agents working in this repository.
 - **Visual design**: Retain the constitution's dark palette, Android green `#3DDC84`, JetBrains Mono, and native controls. The current presentation uses plain project writeups, solid surfaces, and Inter body copy. Simulated shell commands, window chrome, typewriters, ambient effects, and placeholder screens were removed at the owner's request. See `docs/portfolio-presentation.md`; historical terminal design documents are archived context.
 - **Content**: `src/data/portfolio.ts` is the single source for copy, experience, education, skills, and SEO keywords.
 - **Analytics**: Firebase project `bharathmalviya-portfolio`; browser-only, best effort, production-domain collection. Keep event parameters fixed and free of personal data. See `docs/analytics.md` for setup and manual verification. GitHub Pages remains the host.
-- **Source of truth**: `.specify/memory/constitution.md` (v3.1.0). Constitution amendments require explicit approval. Current presentation refinements preserve its static hosting, dark palette, typography, accessibility, and CI requirements.
+- **Source of truth**: `.specify/memory/constitution.md` (v4.0.0). The owner approved publication of the revised presentation on 2026-10-09. Static hosting, accessibility, and CI requirements remain in force; future constitution amendments require explicit approval.
 
 ## Testing
 

@@ -3,8 +3,10 @@
 Updated 2026-10-09 in response to the owner's request to remove the generic,
 AI-written feel of the site. This is one presentation and copy change. The dark
 palette, Android green, JetBrains Mono, native controls, static export, contact
-actions, and production Analytics continue to follow the constitution. No
-constitution amendment or hosting change is part of this work.
+actions, and production Analytics continue to follow the constitution. The owner
+approved publication on 2026-10-09; constitution v4.0.0 now records the revised
+presentation instead of requiring the removed simulated terminal. Hosting is
+unchanged.
 
 ## Presentation
 
@@ -57,6 +59,11 @@ production Analytics ingestion remain unverified.
 The first PR run passed, with a retry of the existing pointer-hover check. Its
 highlight assertion now polls for the visible background change rather than
 sampling during the CSS transition; the touch-device no-hover check is retained.
+
+Final publication review corrected footer spacing: the footer now sets its own
+compact vertical padding instead of inheriting the full content-section padding.
+The owner authorized publication after the local review and PR checks. Manual
+acceptance and Analytics ingestion remain separate from CI and deployment proof.
 
 Manual review for the owner:
 

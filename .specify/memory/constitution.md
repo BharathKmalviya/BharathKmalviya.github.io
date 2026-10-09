@@ -2,6 +2,24 @@
 
 <!--
 Sync Impact Report
+Version change: 3.1.0 → 4.0.0
+Modified principles:
+  - III. Typed, Component-Based UI — replace simulated-terminal presentation
+    with project-focused dark design and immediately readable content
+  - V. Accessible, Responsive, Production Dark Theme — remove terminal-only
+    and typewriter requirements; retain accessibility and reduced motion
+Modified sections:
+  - Technology & Hosting Constraints — remove Framer Motion requirement,
+    document Inter body copy and opaque surfaces
+Removed principles: none
+Approval: owner approved the revised presentation and publication on 2026-10-09
+Templates requiring updates: none (historical design plans remain archived)
+Follow-up TODOs: genuine project screenshots and public product links need
+  verified identity and publication rights before inclusion
+-->
+
+<!--
+Sync Impact Report (previous)
 Version change: 3.0.0 → 3.1.0
 Modified principles: none
 Added principles:
@@ -68,17 +86,21 @@ for a single maintainer who reviews each change.
 
 All application code MUST be TypeScript. UI MUST be composed from focused
 React components, laid out with Tailwind CSS utility classes, and MUST prefer
-native HTML controls styled to the terminal design system unless a library is
+native HTML controls styled to the portfolio design system unless a library is
 justified under Principle IV.
 
-The production visual system is a **dark terminal aesthetic**: near-black
-surfaces, neon Android green `#3DDC84`, JetBrains Mono typography, Framer
-Motion for restrained page motion, and `prefers-reduced-motion` support.
+The production visual system uses near-black solid surfaces, Android green
+`#3DDC84` accents, JetBrains Mono headings and labels, and Inter body copy.
+The developer's identity and project work MUST lead the presentation. Content
+MUST be readable immediately, without waiting for typing or reveal animations.
+Simulated shell commands, window chrome, placeholder app screens, and decorative
+glass or glow effects MUST NOT substitute for information about the work.
 
-**Rationale**: The owner chose a developer-terminal identity over Material
-Web for the live site. Custom chrome keeps the look coherent without a
-deprecated Material Web dependency. Full content and section structure live
-in `src/data/portfolio.ts`.
+**Rationale**: The owner requested a direct, specific portfolio in place of the
+simulated terminal and generic copy. The dark Android palette and existing fonts
+remain recognizable. Full content and section structure live in
+`src/data/portfolio.ts`; current presentation rules live in
+`docs/portfolio-presentation.md`.
 
 ### IV. Minimal Dependency Footprint
 
@@ -96,15 +118,15 @@ Every page MUST be responsive across mobile, tablet, and desktop widths and
 MUST meet baseline accessibility standards (semantic HTML, full keyboard
 navigability, sufficient color contrast).
 
-Production ships a **dark terminal theme** as the only theme. A light theme
+Production ships a **dark theme** as the only theme. A light theme
 MAY be added later; it is not required for `master` deployment.
 
 Neon accents MUST NOT be used as primary body text on black — accents and
 labels only. `prefers-reduced-motion` MUST disable or skip non-essential
-animation (including the hero typewriter).
+animation. Animation is optional and MUST NOT delay access to content.
 
-**Rationale**: Public professional site; dark-only matches the approved
-terminal brand for launch.
+**Rationale**: Public professional site; dark-only preserves the approved palette
+while keeping the portfolio readable and usable across devices.
 
 ### VI. Mentor-Guided Development (NON-NEGOTIABLE)
 
@@ -141,13 +163,15 @@ class of regression on every change.
 
 - **Framework/Language**: Next.js 16 (App Router, `output: 'export'`),
   TypeScript, Tailwind CSS v4.
-- **Motion**: Framer Motion for scroll/entrance orchestration and typewriter
-  reduced-motion handling.
-- **Typography**: JetBrains Mono via `next/font/google`.
+- **Motion**: No animation library is required. CSS scrolling and transitions
+  MUST respect `prefers-reduced-motion`; content remains visible at initial load.
+- **Typography**: JetBrains Mono and Inter via `next/font/google`.
 - **Testing**: Vitest for unit logic; Playwright + `@axe-core/playwright` for
   E2E/UI-UX/accessibility regression coverage, run in CI on every PR.
-- **Visual design**: Dark terminal — `#070807` / surface panels, neon
-  `#3DDC84`, ambient CSS atmosphere. Content source: `src/data/portfolio.ts`.
+- **Visual design**: Dark `#070a08`, solid `#101712` surfaces, Android green
+  `#3DDC84` accents, opaque navigation, and project writeups. Content source:
+  `src/data/portfolio.ts`. Screenshots and public project links MUST be genuine;
+  outcome and scale claims MUST be supported by the owner's project records.
 - **Contact**: Copy-email button + `mailto:` (no server). EmailJS MAY be
   added later, client-side only.
 - **SEO**: Next.js Metadata API, JSON-LD Person, `robots.ts`, `sitemap.ts`.
@@ -187,4 +211,4 @@ user approval and a version bump:
 `/speckit-plan` and `/speckit-tasks` output MUST verify compliance; unresolved
 violations go in Complexity Tracking with justification.
 
-**Version**: 3.1.0 | **Ratified**: 2026-07-17 | **Last Amended**: 2026-07-18
+**Version**: 4.0.0 | **Ratified**: 2026-07-17 | **Last Amended**: 2026-10-09
