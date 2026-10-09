@@ -42,8 +42,9 @@ pnpm run build
 
 Firebase Analytics uses committed public web-app configuration; no Firebase admin
 credential or additional Actions environment variable is required. Production
-collection starts after this change reaches `master` and Pages deploys successfully.
-Development and preview hosts are excluded. See [analytics.md](analytics.md) for
+collection is enabled only for production builds on the configured public domains;
+deployment success does not prove event ingestion. Development and preview hosts
+are excluded. See [analytics.md](analytics.md) for
 the project identifiers, event catalog, and manual DebugView checks.
 
 ## Historical Kobweb site
